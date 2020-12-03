@@ -6,6 +6,7 @@
 #include <netinet/if_ether.h>
 #include <netinet/ip_icmp.h>
 #include <netinet/tcp.h>
+#include <netinet/udp.h>
 #include <arpa/inet.h>
 #include <time.h>
 
@@ -16,6 +17,7 @@ void print_ethernet_header( unsigned char * );
 void print_ip_header( unsigned char * );
 void print_icmp_packet( unsigned char *, int );
 void print_tcp_packet( unsigned char *, int );
+void print_udp_packet( unsigned char *, int );
 
 int main () { 
 
@@ -66,6 +68,32 @@ void print_packet( unsigned char *buffer, int data_size ) {
 		print_icmp_packet( buffer, data_size );
 	else if ( ip_protocol == IPPROTO_TCP )
 		print_tcp_packet( buffer, data_size );
+	else if ( ip_protocol == IPPROTO_UDP )
+		print_udp_packet( buffer, data_size );
+	else
+		printf( "\n\n%d\n\n", ip_protocol );
+
+}
+
+void print_udp_packet( unsigned char *buffer, int data_size ) {
+
+	printf( "***********************UDP Packet***********************\n\n");
+
+	print_ethernet_header( buffer );
+	printf( "\n" );
+	print_ip_header( buffer );
+	printf( "\n" );
+
+	struct iphdr *ip_header = (struct iphdr *) ( buffer + sizeof( struct ethhdr ) );
+	int ip_header_len = ip_header->ihl * 4;
+
+	struct udphdr *udp_header = (struct udphdr *) ( buffer + ip_header_len + sizeof( struct ethhdr ) );
+
+	printf( "UDP Header:\n" );
+	printf( "\t|-Source Port        : %d\n", ntohs( udp_header->source ) );
+	printf( "\t|-Destination Port   : %d\n", ntohs( udp_header->dest ) );
+	printf( "\t|-UDP Length         : %d\n", ntohs( udp_header->len ) );
+	printf( "\t|-UDP Checksum       : %d\n", ntohs( udp_header->check ) );
 
 }
 
