@@ -20,6 +20,7 @@ void print_tcp_packet( unsigned char *, int );
 void print_udp_packet( unsigned char *, int );
 void print_icmp_packet( unsigned char *, int );
 void print_igmp_packet( unsigned char *, int );
+void print_ip_protocol_name( int );
 
 int main () { 
 
@@ -76,7 +77,7 @@ void print_packet( unsigned char *buffer, int data_size ) {
 	else if ( ip_protocol == IPPROTO_IGMP ) 
 		print_igmp_packet( buffer, data_size );
 	else
-		printf( "\n\n%d\n\n", ip_protocol );
+		print_ip_protocol_name( ip_protocol );
 
 }
 
@@ -232,3 +233,90 @@ void print_ethernet_header( unsigned char *buffer ) {
 		);
 	printf( "\t|-Protocol             : %u \n", (unsigned short) eth->h_proto );
 }
+
+
+void print_ip_protocol_name( int protocol ) {
+	switch ( protocol ) {
+		case IPPROTO_IP:
+			printf( "Dummy protocol for TCP\n" );
+			break; 
+		case IPPROTO_ICMP:
+			printf( "Internet Control Message Protocol\n" );
+			break;
+		case IPPROTO_IGMP:
+			printf( "Internet Group Management Protocol\n" );
+			break;
+		case IPPROTO_IPIP:
+			printf( "IPIP tunnels (older KA9Q tunnels use 94)\n");
+			break;
+		case IPPROTO_TCP:
+			printf( "Transmissio Control Protocol\n" );
+			break;
+		case IPPROTO_EGP:
+			printf( "Exterior Gateway Protocol\n" );
+			break;
+		case IPPROTO_PUP:
+			printf( "Xerox PUP\n" );
+			break;
+		case IPPROTO_UDP:
+			printf( "User Datagram Protocol\n" );
+			break;
+		case IPPROTO_IDP:
+			printf( "XNS IDP Protocol\n" );
+			break;
+		case IPPROTO_TP:
+			printf( "SO Transport Protocol Class 4\n" );
+			break;
+		case IPPROTO_DCCP:
+			printf( "Datagram Congestion Control Protocol\n" );
+			break;
+		case IPPROTO_IPV6:
+			printf( "IPv6 Encapsulation\n" );
+			break;
+		case IPPROTO_RSVP:
+			printf( "Reservation Protocol\n" );
+			break; 
+		case IPPROTO_GRE:
+			printf( "General Routing Encapsulation\n" );
+			break;
+		case IPPROTO_ESP:
+			printf( "Encapsulatin Security Payload\n" );
+			break;
+		case IPPROTO_AH:
+			printf( "Authentication Header\n" );
+			break; 
+		case IPPROTO_MTP:
+			printf( "Multicast Transport Protocol\n" );
+			break;
+		case IPPROTO_BEETPH:
+			printf( "IP Option Pseudo Header for BEET\n" );
+			break;
+		case IPPROTO_ENCAP:
+			printf( "Encapsulation Header\n" );
+			break;
+		case IPPROTO_PIM:
+			printf( "Protocol Independent Multicast\n" );
+			break;
+		case IPPROTO_COMP:
+			printf( "Compresion Header Protocol\n" );
+			break;
+		case IPPROTO_SCTP:
+			printf( "Stream Control Transmission Protocol\n" );
+			break;
+		case IPPROTO_UDPLITE:
+			printf( "UDP-Lite Protocol\n" );
+			break;
+		case IPPROTO_MPLS:
+			printf( "MPLS in IP\n" );
+			break;
+		case IPPROTO_RAW:
+			printf( "Raw IP Packets\n" );
+			break;
+		case 128:
+			printf( "Service-Specific Connection-Oriented Protocol in a Multilink and Connectionless Environment\n" );
+			break;
+		default:
+			printf( "%d\n", (unsigned int) protocol );
+	}
+}
+
