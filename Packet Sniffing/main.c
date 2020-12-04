@@ -5,6 +5,7 @@
 #include <netinet/in.h>
 #include <netinet/if_ether.h>
 #include <netinet/ip_icmp.h>
+#include <netinet/igmp.h>
 #include <netinet/tcp.h>
 #include <netinet/udp.h>
 #include <arpa/inet.h>
@@ -15,9 +16,10 @@
 void print_packet( unsigned char *, int );
 void print_ethernet_header( unsigned char * );
 void print_ip_header( unsigned char * );
-void print_icmp_packet( unsigned char *, int );
 void print_tcp_packet( unsigned char *, int );
 void print_udp_packet( unsigned char *, int );
+void print_icmp_packet( unsigned char *, int );
+void print_igmp_packet( unsigned char *, int );
 
 int main () { 
 
@@ -71,6 +73,8 @@ void print_packet( unsigned char *buffer, int data_size ) {
 		print_tcp_packet( buffer, data_size );
 	else if ( ip_protocol == IPPROTO_UDP )
 		print_udp_packet( buffer, data_size );
+	else if ( ip_protocol == IPPROTO_IGMP ) 
+		print_igmp_packet( buffer, data_size );
 	else
 		printf( "\n\n%d\n\n", ip_protocol );
 
@@ -149,15 +153,37 @@ void print_icmp_packet( unsigned char *buffer, int data_size ) {
 	struct icmphdr *icmp_header = (struct icmphdr *) ( buffer + sizeof( struct ethhdr ) + ip_header_len );
 
 	printf( "ICMP Header:\n" );
-	printf( "\t|-Type    : %d\n", (unsigned int) icmp_header->type );
+	printf( "\t|-Type    : %d ", (unsigned int) icmp_header->type );
 	if ( (unsigned int) icmp_header->type == ICMP_TIME_EXCEEDED ) 
 		printf( "\t(TTL Expired)\n" );
 	else if ( (unsigned int) icmp_header->type == ICMP_ECHOREPLY )
-		printf( "\tEcho Reply\n" );
+		printf( "\t(Echo Reply)\n" );
 	printf( "\t|-Code    : %d\n", icmp_header->code );
 	printf( "\t|-Checksum: %d\n", ntohs( icmp_header->checksum ) );
 
 	printf( "\n\n" );
+
+}
+
+void print_igmp_packet( unsigned char * buffer, int data_size ) {
+
+	printf( "***********************IGMP Packet***********************\n\n");
+
+	print_ethernet_header( buffer );
+	printf( "\n" );
+	print_ip_header( buffer );
+	printf( "\n" );
+
+	struct iphdr *ip_header = (struct iphdr *) ( buffer + sizeof( struct ethhdr ) );
+	int ip_header_len = ip_header->ihl * 4;
+
+	struct igmp *igmp_header = (struct igmp *) ( buffer + sizeof( struct ethhdr ) + ip_header_len );
+
+	printf( "IGMP HEADER:\n" );
+	printf( "\t|-Type      : %d\n", (unsigned int) igmp_header->igmp_type );
+	printf( "\t|-Code      : %d\n", (unsigned int) igmp_header->igmp_code );
+	printf( "\t|-Checksum  : %d\n", ntohs( igmp_header->igmp_cksum ) );
+	printf( "\t|-Group     : %s\n", inet_ntoa( igmp_header->igmp_group ) );
 
 }
 
