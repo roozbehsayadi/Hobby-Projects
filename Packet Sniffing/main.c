@@ -23,9 +23,9 @@ int main () {
 
 	// First, we need to create a socket 
 	int my_socket = socket( AF_PACKET, SOCK_RAW, htons(ETH_P_ALL) );
-	// arg0: Address Family - AF_INT is IP version 4 
+	// arg0: Address Family - AF_PACKET is used to play with packets 
 	// arg1: Type - We need a raw socket 
-	// arg2: Protocol - We only want to sniff IP packets 
+	// arg2: Protocol - We sniff every packet, along with their ethernet headers
 
 	// If an error happened
 	if ( my_socket < 0 ) {
@@ -36,9 +36,8 @@ int main () {
 		return 1;
 	}
 
+	// The buffer used to store packet information each time we recieve one 
 	unsigned char *buffer = (unsigned char*) malloc( PACKET_BUFFER_SIZE );
-
-	int counter = 0;
 
 	while ( 1 ) {
 		struct sockaddr saddr;
@@ -59,6 +58,8 @@ int main () {
 
 }
 
+// Find out the type of backet stored in buffer
+// and print its data accordingly 
 void print_packet( unsigned char *buffer, int data_size ) {
 	printf( "\n\n\n" );
 
@@ -94,6 +95,8 @@ void print_udp_packet( unsigned char *buffer, int data_size ) {
 	printf( "\t|-Destination Port   : %d\n", ntohs( udp_header->dest ) );
 	printf( "\t|-UDP Length         : %d\n", ntohs( udp_header->len ) );
 	printf( "\t|-UDP Checksum       : %d\n", ntohs( udp_header->check ) );
+	
+	printf( "\n\n" );
 
 }
 
@@ -127,6 +130,8 @@ void print_tcp_packet( unsigned char *buffer, int data_size ) {
 	printf( "\t|-Checksum Flag        : %d\n", ntohs( tcp_header->check ) );
 	printf( "\t|-Urgent Flag          : %d\n", tcp_header->urg_ptr );
 
+	printf( "\n\n" );
+
 }
 
 void print_icmp_packet( unsigned char *buffer, int data_size ) {
@@ -151,6 +156,8 @@ void print_icmp_packet( unsigned char *buffer, int data_size ) {
 		printf( "\tEcho Reply\n" );
 	printf( "\t|-Code    : %d\n", icmp_header->code );
 	printf( "\t|-Checksum: %d\n", ntohs( icmp_header->checksum ) );
+
+	printf( "\n\n" );
 
 }
 
