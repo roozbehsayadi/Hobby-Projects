@@ -1,8 +1,12 @@
-all:
-	g++ main.cpp -o Flocking -Wall -O2 -std=c++11
+all: main boid
+	g++ main.o boid.o -o Flocking -Wall -O2 -std=c++11
 run:
 	./Flocking
+main:
+	g++ -c main.cpp 
+boid: boid.h boid.cpp
+	g++ -c boid.cpp 
 point: point.h point.cpp 
 	g++ -c point.cpp 
-clear:
+clean:
 	rm -rf *.o Flocking
