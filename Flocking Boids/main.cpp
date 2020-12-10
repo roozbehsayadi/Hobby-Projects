@@ -1,5 +1,7 @@
 
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include <string>
 
 #include "flock.h"
@@ -15,7 +17,9 @@ int main ( int argc, char **argv ) {
 		return 1;
 	}
 
-	Flock flock;
+	srand( time( nullptr ) );
+
+	Flock flock( 1920, 1080 );
 	flock.initialize( atoi( argv[1] ) );
 
 	return 0;

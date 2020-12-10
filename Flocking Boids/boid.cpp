@@ -36,4 +36,3 @@ template Boid::Boid<std::deque<double>::iterator>( int, int, std::deque<double>:
 template Boid::Boid<std::array<double, 2>::iterator>( int, int, std::array<double, 2>::iterator );
 template Boid::Boid<std::forward_list<double>::iterator>( int, int, std::forward_list<double>::iterator );
 
-
