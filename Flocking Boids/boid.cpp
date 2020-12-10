@@ -3,12 +3,12 @@
 
 Boid::Boid() : Boid( 0, 0, 0, 0 ) {}
 
-Boid::Boid( int x, int y, int xVel, int yVel ) {
+Boid::Boid( int x, int y, double xVel, double yVel ) {
 	location = Point( x, y );
 	velocity = {xVel, yVel};
 }
 
-Boid::Boid( const Point &location, int xVel, int yVel ) {
+Boid::Boid( const Point &location, double xVel, double yVel ) {
 	this->location = location;
 	velocity = {xVel, yVel};
 }
@@ -24,16 +24,16 @@ Boid::Boid( Iter begin ) {
 	velocity = { *begin, *(++begin) };
 }
 
-template Boid::Boid<std::vector<int>::iterator>( std::vector<int>::iterator );
-template Boid::Boid<std::list<int>::iterator>( std::list<int>::iterator );
-template Boid::Boid<std::deque<int>::iterator>( std::deque<int>::iterator );
-template Boid::Boid<std::array<int, 2>::iterator>( std::array<int, 2>::iterator );
-template Boid::Boid<std::forward_list<int>::iterator>( std::forward_list<int>::iterator );
+template Boid::Boid<std::vector<double>::iterator>( std::vector<double>::iterator );
+template Boid::Boid<std::list<double>::iterator>( std::list<double>::iterator );
+template Boid::Boid<std::deque<double>::iterator>( std::deque<double>::iterator );
+template Boid::Boid<std::array<double, 2>::iterator>( std::array<double, 2>::iterator );
+template Boid::Boid<std::forward_list<double>::iterator>( std::forward_list<double>::iterator );
 
-template Boid::Boid<std::vector<int>::iterator>( int, int, std::vector<int>::iterator );
-template Boid::Boid<std::list<int>::iterator>( int, int, std::list<int>::iterator );
-template Boid::Boid<std::deque<int>::iterator>( int, int, std::deque<int>::iterator );
-template Boid::Boid<std::array<int, 2>::iterator>( int, int, std::array<int, 2>::iterator );
-template Boid::Boid<std::forward_list<int>::iterator>( int, int, std::forward_list<int>::iterator );
+template Boid::Boid<std::vector<double>::iterator>( int, int, std::vector<double>::iterator );
+template Boid::Boid<std::list<double>::iterator>( int, int, std::list<double>::iterator );
+template Boid::Boid<std::deque<double>::iterator>( int, int, std::deque<double>::iterator );
+template Boid::Boid<std::array<double, 2>::iterator>( int, int, std::array<double, 2>::iterator );
+template Boid::Boid<std::forward_list<double>::iterator>( int, int, std::forward_list<double>::iterator );
 
 
