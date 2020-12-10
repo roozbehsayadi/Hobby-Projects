@@ -15,4 +15,4 @@ color: utils/color.h utils/color.cpp
 clean:
 	rm -rf *.o Flocking
 open:
-	vim -p flock.h flock.cpp boid.h boid.cpp utils/point.h utils/point.cpp main.cpp Makefile 
+	vim -p flock.h flock.cpp boid.h boid.cpp utils/point.h utils/point.cpp utils/color.h utils/color.cpp main.cpp Makefile 
