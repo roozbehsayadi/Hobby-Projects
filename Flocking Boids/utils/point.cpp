@@ -3,24 +3,24 @@
 
 Point::Point() : Point( 0, 0 ) {}
 
-Point::Point( int x, int y ) {
+Point::Point( double x, double y ) {
 	setX( x );
 	setY( y );
 }
 
-int Point::getX() const {
+double Point::getX() const {
 	return x;
 }
 
-int Point::getY() const {
+double Point::getY() const {
 	return y;
 }
 
-void Point::setX( int x ) {
+void Point::setX( double x ) {
 	this->x = x;
 }
 
-void Point::setY( int y ) {
+void Point::setY( double y ) {
 	this->y = y;
 }
 

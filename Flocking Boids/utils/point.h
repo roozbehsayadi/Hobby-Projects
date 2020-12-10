@@ -6,18 +6,18 @@ class Point {
 
 	private:
 
-		int x, y;
+		double x, y;
 
 	public:
 
 		Point();
-		Point( int, int );
+		Point( double, double );
 
-		int getX() const;
-		int getY() const; 
+		double getX() const;
+		double getY() const; 
 
-		void setX( int );
-		void setY( int );
+		void setX( double );
+		void setY( double );
 
 };
 
