@@ -1,6 +1,6 @@
 all: main.o flock.o boid.o point.o color.o
 	g++ main.o flock.o boid.o point.o color.o -o Flocking -Wall -O2 -std=c++11
-run:
+run: all 
 	./Flocking 100
 main.o: main.cpp 
 	g++ -c main.cpp 
