@@ -12,6 +12,9 @@ class Color {
 		Color( unsigned char );
 		Color( unsigned char, unsigned char, unsigned char );
 
+		void setColor( unsigned char, unsigned char, unsigned char );
+		void setColor( const Color & );
+
 };
 
 #endif 

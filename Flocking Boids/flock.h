@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "boid.h"
+#include "utils/color.h"
 
 // Each flock consists of some boids. Creates and
 // holds one flock and handles their movements.
@@ -13,10 +14,12 @@ class Flock {
 	private:
 
 		std::vector<Boid> boids;
+		Color color;
 
 	public:
 
 		Flock();
+		Flock( const Color & );
 
 };
 
