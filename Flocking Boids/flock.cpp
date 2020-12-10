@@ -13,5 +13,9 @@ Flock::Flock( const Color &color ) {
 
 void Flock::initialize( int boidsCount ) {
 	boids.resize( boidsCount );
+	for ( auto &boid : boids ) {
+		boid.velocity = { 1, -1 };
+		boid.location = Point( 10, 10 );
+	}
 }
 

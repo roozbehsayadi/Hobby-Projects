@@ -21,6 +21,8 @@ class Flock {
 		Flock();
 		Flock( const Color & );
 
+		// Resizes the vector of Boids according to the first argument.
+		// Initializes the attributes of each boid with a random value.
 		void initialize( int );
 
 };
