@@ -21,6 +21,8 @@ class Flock {
 		Flock();
 		Flock( const Color & );
 
+		void initialize( int );
+
 };
 
 #endif

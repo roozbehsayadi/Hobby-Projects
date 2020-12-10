@@ -8,6 +8,10 @@ Flock::Flock() {
 
 Flock::Flock( const Color &color ) {
 	boids.clear();
-	color.setColor( color );
+	this->color.setColor( color );
+}
+
+void Flock::initialize( int boidsCount ) {
+	boids.resize( boidsCount );
 }
 

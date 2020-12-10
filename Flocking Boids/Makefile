@@ -1,7 +1,7 @@
 all: main flock boid point color
-	g++ main.o boid.o point.o -o Flocking -Wall -O2 -std=c++11
+	g++ main.o flock.o boid.o point.o color.o -o Flocking -Wall -O2 -std=c++11
 run:
-	./Flocking
+	./Flocking 100
 main: main.cpp 
 	g++ -c main.cpp 
 flock: flock.h flock.cpp
