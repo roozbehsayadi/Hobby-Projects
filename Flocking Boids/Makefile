@@ -1,5 +1,5 @@
-all: main boid
-	g++ main.o boid.o -o Flocking -Wall -O2 -std=c++11
+all: main boid point 
+	g++ main.o boid.o point.o -o Flocking -Wall -O2 -std=c++11
 run:
 	./Flocking
 main:
