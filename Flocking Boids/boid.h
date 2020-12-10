@@ -8,7 +8,9 @@
 #include <array>
 #include <forward_list>
 
-#include "point.h"
+#include "utils/point.h"
+
+class Flock;
 
 // Each boid in a flock is represented by this class.
 class Boid {
@@ -26,6 +28,9 @@ class Boid {
 		// Will get the first two elements of the iterable for location. 
 		template<typename Iter> Boid( int, int, Iter );
 		template<typename Iter> Boid( Iter );
+
+
+	friend class Flock;
 
 };
 
