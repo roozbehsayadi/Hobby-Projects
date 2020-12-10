@@ -1,6 +1,6 @@
 
-#ifndef __POINT_H
-#define __POINT_H
+#ifndef __UTILS_POINT_H
+#define __UTILS_POINT_H
 
 class Point {
 
