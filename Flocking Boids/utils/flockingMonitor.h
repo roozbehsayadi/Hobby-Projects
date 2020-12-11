@@ -8,6 +8,8 @@
 #include "SDLHandler.h"
 #include "SDLEventType.h"
 
+class Flock;
+
 class FlockingMonitor {
 
 	private: 
@@ -29,6 +31,8 @@ class FlockingMonitor {
 		SDLEventType handleEvents();
 		void drawBoids();
 		void updateScreen();
+	
+	friend class Flock;
 
 };
 

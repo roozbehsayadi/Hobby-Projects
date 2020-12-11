@@ -13,10 +13,8 @@ Flock::Flock( int screenWidth, int screenHeight, const Color &color ) {
 
 	boids.clear();
 	this->color.setColor( color );
-	this->screenWidth = screenWidth;
-	this->screenHeight = screenHeight;
 
-	monitor = new FlockingMonitor( this, this->screenWidth, this->screenHeight );
+	monitor = new FlockingMonitor( this, screenWidth, screenHeight );
 
 }
 
@@ -36,8 +34,8 @@ void Flock::initializeRandomly( int boidsCount ) {
 		// Why didn't I use rand() % screenWidth or rand() % screenHeight?
 		// Because that would be biased.
 		// source: https://en.cppreference.com/w/cpp/numeric/random/rand
-		double xRandom = std::rand() / ( ( RAND_MAX + 1u ) / screenWidth );
-		double yRandom = std::rand() / ( ( RAND_MAX + 1u ) / screenHeight );
+		double xRandom = std::rand() / ( ( RAND_MAX + 1u ) / this->monitor->screen->w );
+		double yRandom = std::rand() / ( ( RAND_MAX + 1u ) / this->monitor->screen->h );
 		boid.location = Point( xRandom, yRandom );
 	}
 
@@ -136,11 +134,11 @@ std::array<double, 2> Flock::boundPosition( const Boid &boid ) {
 	std::array<double, 2> returnValue = {0, 0};
 	if ( boid.location.x < Flock::MARGIN ) 
 		returnValue[0] = 5;
-	if ( boid.location.x > screenWidth - Flock::MARGIN )
+	if ( boid.location.x > this->monitor->screen->w - Flock::MARGIN )
 		returnValue[0] = -5;
 	if ( boid.location.y < Flock::MARGIN ) 
 		returnValue[1] = 5;
-	if ( boid.location.y > screenHeight - Flock::MARGIN )
+	if ( boid.location.y > this->monitor->screen->h - Flock::MARGIN )
 		returnValue[1] = -5;
 	
 	return returnValue;

@@ -30,7 +30,6 @@ class Flock {
 
 		FlockingMonitor *monitor;
 
-		int screenWidth, screenHeight;
 		std::vector<Boid> boids;
 		Color color;
 
