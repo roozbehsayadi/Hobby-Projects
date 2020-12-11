@@ -51,7 +51,9 @@ Oh, and in fullscreen mode, you have to use the *q* button to close the program.
 
 ## Code structure
 
-The most important class in this project is ```FlockingBoids```. Create an instance of it and call the ```start``` method.
+The most important class in this project is ```FlockingBoids```. There is an instance of ```FlockingMonitor``` inside it to show the flocks, and also an array of flocks.
+
+You can see how you should use it in the *main.cpp* file.
 
 Other files are in the *util/* folder. There's a *README* in that folder to describe those files.
 

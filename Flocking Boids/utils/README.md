@@ -1,7 +1,7 @@
 
 # Description of the classes
 
-- **Flock**: Contains the boids of the flock. The other important attribute of this class is ```monitor```, which is a ```FlockingMonitor```.
+- **Flock**: Contains the boids of the flock. The other important attribute of this class is ```monitor```, which is a ```FlockingMonitor```. the monitor's value is assigned from FlockingBoids.
 
 - **Boid**: Represents one boid, obviously. Stores the boid's position and velocity.
 
