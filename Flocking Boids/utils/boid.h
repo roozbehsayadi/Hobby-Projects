@@ -8,7 +8,7 @@
 #include <array>
 #include <forward_list>
 
-#include "utils/point.h"
+#include "point.h"
 
 class Flock;
 

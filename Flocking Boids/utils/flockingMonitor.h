@@ -4,7 +4,7 @@
 
 #include "SDL/SDL.h"
 
-#include "utils/SDLHandler.h"
+#include "SDLHandler.h"
 
 class FlockingMonitor {
 

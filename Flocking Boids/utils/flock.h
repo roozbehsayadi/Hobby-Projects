@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "boid.h"
-#include "utils/color.h"
+#include "color.h"
 #include "flockingMonitor.h"
 
 // Each flock consists of some boids. Creates and

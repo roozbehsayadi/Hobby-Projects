@@ -4,8 +4,7 @@
 #include <time.h>
 #include <string>
 
-#include "flock.h"
-#include "flockingMonitor.h"
+#include "utils/flock.h"
 
 int main ( int argc, char **argv ) {
 

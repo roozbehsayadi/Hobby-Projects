@@ -4,14 +4,14 @@ run: all
 	./Flocking 100
 main.o: main.cpp 
 	g++ -c main.cpp 
-flock.o: flock.h flock.cpp
-	g++ -c flock.cpp 
-boid.o: boid.h boid.cpp
-	g++ -c boid.cpp 
+flock.o: utils/flock.h utils/flock.cpp
+	g++ -c utils/flock.cpp 
+boid.o: utils/boid.h utils/boid.cpp
+	g++ -c utils/boid.cpp 
 SDLHandler.o: utils/SDLHandler.h utils/SDLHandler.cpp 
 	g++ -c utils/SDLHandler.cpp 
-FlockingMonitor.o: flockingMonitor.h flockingMonitor.cpp 
-	g++ -c flockingMonitor.cpp 
+FlockingMonitor.o: utils/flockingMonitor.h utils/flockingMonitor.cpp 
+	g++ -c utils/flockingMonitor.cpp 
 point.o: utils/point.h utils/point.cpp 
 	g++ -c utils/point.cpp 
 color.o: utils/color.h utils/color.cpp 
