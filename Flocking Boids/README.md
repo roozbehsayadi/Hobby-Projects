@@ -53,7 +53,7 @@ Oh, and in fullscreen mode, you have to use the *q* button to close the program.
 
 The most important class in this project is ```FlockingBoids```. Create an instance of it and call the ```start``` method.
 
-Other files are in the *util/* folder. There's a README in that folder to describe those files.
+Other files are in the *util/* folder. There's a *README* in that folder to describe those files.
 
 ## Reference
 
@@ -63,7 +63,7 @@ I used this amazing article by Conrad Parker to get a sense of what should I do,
 
 ## Possible improvements
 
-- **Performance**: Its performance can be improved. I stored all the boids in an array, and every time I wanted to find the close boids of another boids, I had to search the entire array and the sort them based on their distance. Using a Quadtree can improve its performance a lot.
+- **Performance**: Its performance can be improved. I stored all the boids in an array, and every time I want to find the close boids of another boid, I have to search the entire array, and then sort them based on their distance. Using a Quadtree can improve its performance a lot.
 
 - **Tweakable parameters**: I think some scroll bars on the screen, for changing the behaviour of the boids real-time can be quite impressive. I mean how much do boids get away from each other, how much they want to sync their velocity with other boids and...
 
