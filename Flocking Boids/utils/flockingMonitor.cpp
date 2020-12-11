@@ -20,10 +20,13 @@ FlockingMonitor::~FlockingMonitor() {
 SDLEventType FlockingMonitor::handleEvents() {
 
 	SDL_Event event;
-	if ( SDL_PollEvent( &event ) )
+	if ( SDL_PollEvent( &event ) ) {
 		if ( event.type == SDL_KEYDOWN )
 			if ( event.key.keysym.sym == SDLK_q )
 				return SDLEventType::QUIT;
+		if ( event.type == SDL_QUIT )
+			return SDLEventType::QUIT;
+	}
 	return SDLEventType::NONE;
 
 }
