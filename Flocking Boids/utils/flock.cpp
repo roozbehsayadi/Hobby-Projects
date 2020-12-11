@@ -1,6 +1,9 @@
 
 #include "flock.h"
 
+const int Flock::MARGIN = 30;
+const int Flock::VISUAL_RANGE = 20;
+
 Flock::Flock() {}
 
 Flock::Flock( int screenWidth, int screenHeight ) : Flock( screenWidth, screenHeight, Color( 255, 255, 255 ) ) {}
@@ -46,8 +49,42 @@ void Flock::initializeRandomly( int boidsCount ) {
 
 void Flock::moveBoids() { 
 
-	for ( auto &boid : boids )
+	for ( auto &boid : boids ) {
+		std::vector<std::array<double, 2>> vs( 0 );
+		vs.push_back( moveTowardCenterOfMass( boid ) );
+		
+		for ( int i = 0; i < vs.size(); i++ ) {
+			boid.velocity[0] += vs[i][0];
+			boid.velocity[1] += vs[i][1];
+		}
+
 		boid.location = { boid.location.x + boid.velocity[0], boid.location.y + boid.velocity[1] };
+	}
+
+}
+
+std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
+
+	std::vector<std::pair<double, int>> distsAndIndexes;
+
+	for ( int i = 0; i < boids.size(); i++ )
+		distsAndIndexes.push_back( std::make_pair( Boid::getDistance( boids[i], boid ), i ) );
+
+	std::sort( distsAndIndexes.begin(), distsAndIndexes.end() );
+
+	std::array<double, 2> returnValue = {0, 0};
+	for ( int i = 1; i <= std::min( Flock::VISUAL_RANGE, (int) distsAndIndexes.size() - 1 ); i++ ) {
+		returnValue[0] += boids[ distsAndIndexes[i].second ].location.x;
+		returnValue[1] += boids[ distsAndIndexes[i].second ].location.y;
+	}
+
+	int temp = std::min( Flock::VISUAL_RANGE, (int) distsAndIndexes.size() );
+	returnValue = { returnValue[0] / temp, returnValue[1] / temp };
+
+	returnValue = { returnValue[0] - boid.location.x, returnValue[1] - boid.location.y };
+	returnValue = { returnValue[0] / 100, returnValue[1] / 100 };
+
+	return returnValue;
 
 }
 

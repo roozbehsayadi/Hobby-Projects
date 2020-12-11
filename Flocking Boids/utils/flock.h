@@ -3,7 +3,11 @@
 #define __UTILS_FLOCK_H
 
 #include <stdlib.h>
+#include <iostream>
+#include <utility>
+#include <array>
 #include <vector>
+#include <algorithm>
 
 #include "boid.h"
 #include "color.h"
@@ -19,13 +23,22 @@ class Flock {
 
 	private:
 
-		static const int MARGIN = 30;
+		static const int MARGIN;
+		static const int VISUAL_RANGE; //How many boids can a single boid see? 
 
 		FlockingMonitor *monitor;
 
 		int screenWidth, screenHeight;
 		std::vector<Boid> boids;
 		Color color;
+
+		void moveBoids();
+
+		// Resizes the vector of Boids according to the first argument.
+		// Initializes the attributes of each boid with a random value.
+		void initializeRandomly( int );
+
+		std::array<double, 2> moveTowardCenterOfMass( const Boid & );
 
 	public:
 
@@ -35,12 +48,6 @@ class Flock {
 		Flock( int, int, const Color & );
 
 		~Flock();
-
-		// Resizes the vector of Boids according to the first argument.
-		// Initializes the attributes of each boid with a random value.
-		void initializeRandomly( int );
-
-		void moveBoids();
 
 	friend class FlockingMonitor;
 	friend class FlockingBoids;

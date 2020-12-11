@@ -7,6 +7,7 @@
 #include <deque>
 #include <array>
 #include <forward_list>
+#include <math.h>
 
 #include "point.h"
 
@@ -29,6 +30,8 @@ class Boid {
 		// Will get the first two elements of the iterable for location. 
 		template<typename Iter> Boid( int, int, Iter );
 		template<typename Iter> Boid( Iter );
+
+		static double getDistance( const Boid &, const Boid & );
 
 
 	friend class Flock;

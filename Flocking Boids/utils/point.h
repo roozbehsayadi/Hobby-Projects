@@ -3,6 +3,7 @@
 #define __UTILS_POINT_H
 
 class Flock;
+class Boid;
 
 class Point {
 
@@ -22,6 +23,7 @@ class Point {
 		void setY( double );
 	
 	friend class Flock;
+	friend class Boid;
 
 };
 

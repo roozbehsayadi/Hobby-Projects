@@ -2,12 +2,16 @@
 #ifndef __FLOCKING_BOIDS_H
 #define __FLOCKING_BOIDS_H
 
+#include <chrono>
+
 #include "utils/flock.h"
 #include "utils/SDLEventType.h"
 
 class FlockingBoids {
 
 	private:
+
+		const static int FPS;
 
 		Flock *flock;
 

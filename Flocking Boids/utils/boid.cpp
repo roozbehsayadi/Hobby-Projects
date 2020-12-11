@@ -24,6 +24,12 @@ Boid::Boid( Iter begin ) {
 	velocity = { *begin, *(++begin) };
 }
 
+double Boid::getDistance( const Boid &b1, const Boid &b2 ) {
+	double deltaX = b1.location.x - b2.location.x;
+	double deltaY = b1.location.y - b2.location.y;
+	return sqrt( pow( deltaX, 2 ) + pow( deltaY, 2 ) );
+}
+
 template Boid::Boid<std::vector<double>::iterator>( std::vector<double>::iterator );
 template Boid::Boid<std::list<double>::iterator>( std::list<double>::iterator );
 template Boid::Boid<std::deque<double>::iterator>( std::deque<double>::iterator );
