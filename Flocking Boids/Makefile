@@ -19,4 +19,4 @@ color.o: utils/color.h utils/color.cpp
 clean:
 	rm -rf *.o Flocking
 open:
-	vim -p flock.h flock.cpp boid.h boid.cpp utils/point.h utils/point.cpp utils/color.h utils/color.cpp main.cpp Makefile 
+	vim -p utils/flock.h utils/flock.cpp utils/flockingMonitor.h utils/flockingMonitor.cpp utils/SDLHandler.h utils/SDLHandler.cpp utils/boid.h utils/boid.cpp main.cpp Makefile 
