@@ -47,7 +47,7 @@ Oh, and in fullscreen mode, you have to use the *q* button to close the program.
 
 ## Screenshot
 
-[Screenshot](https://github.com/roozbehsayadi/Hobby-Projects/blob/master/Flocking%20Boids/Screenshot.png)
+[Screenshot](https://raw.githubusercontent.com/roozbehsayadi/Hobby-Projects/master/Flocking%20Boids/Screenshot.png)
 
 ## Code structure
 
