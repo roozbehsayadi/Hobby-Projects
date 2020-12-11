@@ -43,6 +43,8 @@ You can run the code yourself, simply execute the binary output with this comman
 
 An argument is also required to run the game. This is the number of boids in the screen. For example, to have 100 boids on the screen, you should run this command: ```./Flocking 100```. High number of boids is not recommended because it'll eat your computer's performance like a... practically like A CHROME TAB.
 
+Oh, and in fullscreen mode, you have to use the *q* button to close the program.
+
 ## Code structure
 
 The most important class in this project is ```FlockingBoids```. Create an instance of it and call the ```start``` method.
