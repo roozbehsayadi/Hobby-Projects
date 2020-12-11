@@ -33,6 +33,7 @@ SDLEventType FlockingMonitor::handleEvents() {
 
 void FlockingMonitor::drawBoids() {
 
+	SDL_FillRect( screen, NULL, 0 );
 	for ( auto &i : flock->boids )
 		SDLHandler::drawCircle( screen, 2, i.location, flock->color );
 

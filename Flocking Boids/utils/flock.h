@@ -10,6 +10,8 @@
 #include "flockingMonitor.h"
 
 class FlockingMonitor;
+class FlockingBoids;
+class Point;
 
 // Each flock consists of some boids. Creates and
 // holds one flock and handles their movements.
@@ -38,9 +40,10 @@ class Flock {
 		// Initializes the attributes of each boid with a random value.
 		void initializeRandomly( int );
 
+		void moveBoids();
+
 	friend class FlockingMonitor;
 	friend class FlockingBoids;
-
 
 };
 

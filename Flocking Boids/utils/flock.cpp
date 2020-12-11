@@ -25,13 +25,13 @@ void Flock::initializeRandomly( int boidsCount ) {
 	boids.resize( boidsCount );
 
 	for ( auto &boid : boids ) {
-		double vxRandom = std::rand() / ( ( RAND_MAX + 1u ) / 3 );
-		double vyRandom = std::rand() / ( ( RAND_MAX + 1u ) / 3 );
+		double vxRandom = ( (double) std::rand() / RAND_MAX ) * 8 - 4;
+		double vyRandom = ( (double) std::rand() / RAND_MAX ) * 8 - 4;
+		// double vxRandom = (double) std::rand() / ( ( RAND_MAX + 1u ) / 3 );
+		// double vyRandom = (double) std::rand() / ( ( RAND_MAX + 1u ) / 3 );
 		// I tried to subtract 1 from these values at the above lines,
 		// but their outputs got all messed up and I don't know why,
 		// so I put these operation down here. 
-		vxRandom--;
-		vyRandom--; 
 		boid.velocity = { vxRandom, vyRandom };
 
 		// Why didn't I use rand() % screenWidth or rand() % screenHeight?
@@ -41,6 +41,13 @@ void Flock::initializeRandomly( int boidsCount ) {
 		double yRandom = std::rand() / ( ( RAND_MAX + 1u ) / screenHeight );
 		boid.location = Point( xRandom, yRandom );
 	}
+
+}
+
+void Flock::moveBoids() { 
+
+	for ( auto &boid : boids )
+		boid.location = { boid.location.x + boid.velocity[0], boid.location.y + boid.velocity[1] };
 
 }
 

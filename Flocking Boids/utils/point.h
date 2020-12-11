@@ -2,6 +2,8 @@
 #ifndef __UTILS_POINT_H
 #define __UTILS_POINT_H
 
+class Flock;
+
 class Point {
 
 	private:
@@ -18,6 +20,8 @@ class Point {
 
 		void setX( double );
 		void setY( double );
+	
+	friend class Flock;
 
 };
 

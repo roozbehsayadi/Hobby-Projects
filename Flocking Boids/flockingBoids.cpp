@@ -19,6 +19,7 @@ void FlockingBoids::start() {
 		SDLEventType eventType = flock->monitor->handleEvents();
 		if ( eventType == SDLEventType::QUIT )
 			return;
+		flock->moveBoids();
 		flock->monitor->drawBoids();
 		flock->monitor->updateScreen();
 
