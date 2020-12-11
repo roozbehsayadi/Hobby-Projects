@@ -6,11 +6,6 @@ void SDLHandler::initSDL( int flag ) {
 		std::cerr << "Error in initializing SDL in SDLHandler::initSDL\n";
 		return;
 	}
-	int IMGFlags = IMG_INIT_JPG || IMG_INIT_PNG;
-	if ( IMG_Init( IMGFlags ) != IMGFlags ) {
-		std::cerr << "Error in initializing SDL_Image in SDLHandler::initSDL\n";
-		return;
-	}
 }
 
 SDL_Surface *SDLHandler::initWindow( std::string caption, int &screenWidth, int &screenHeight ) {
@@ -25,25 +20,6 @@ SDL_Surface *SDLHandler::initWindow( std::string caption, int &screenWidth, int 
 	}
 	else 
 		return SDL_SetVideoMode( screenWidth, screenHeight, 32, SDL_HWSURFACE );
-
-}
-
-SDL_Surface *loadIMG( std::string path ) { 
-
-	SDL_Surface *loadedImage = NULL, *optimizedImage = NULL; 
-
-	loadedImage = IMG_Load( path.c_str() );
-
-	if ( loadedImage == NULL ) {
-		std::cerr << "Error in loading image from path " << path << " in SDLHandler::loadIMG\n";
-		return NULL;
-	}
-
-	optimizedImage = SDL_DisplayFormat( loadedImage );
-
-	SDL_FreeSurface( loadedImage );
-
-	return optimizedImage;
 
 }
 
