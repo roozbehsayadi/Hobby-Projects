@@ -50,6 +50,7 @@ void Flock::moveBoids() {
 		vs.push_back( moveTowardCenterOfMass( boid ) );
 		vs.push_back( keepDistanceFromObjects( boid ) );
 		vs.push_back( matchVelocityWithOtherBoids( boid ) );
+		vs.push_back( boundPosition( boid ) );
 		
 		for ( int i = 0; i < vs.size(); i++ ) {
 			boid.velocity[0] += vs[i][0];
@@ -131,6 +132,22 @@ std::array<double, 2> Flock::matchVelocityWithOtherBoids( const Boid &boid ) {
 
 	returnValue = { returnValue[0] / 8, returnValue[1] / 8 };
 
+	return returnValue;
+
+}
+
+std::array<double, 2> Flock::boundPosition( const Boid &boid ) { 
+
+	std::array<double, 2> returnValue = {0, 0};
+	if ( boid.location.x < Flock::MARGIN ) 
+		returnValue[0] = 5;
+	if ( boid.location.x > screenWidth - Flock::MARGIN )
+		returnValue[0] = -5;
+	if ( boid.location.y < Flock::MARGIN ) 
+		returnValue[1] = 5;
+	if ( boid.location.y > screenHeight - Flock::MARGIN )
+		returnValue[1] = -5;
+	
 	return returnValue;
 
 }

@@ -48,6 +48,7 @@ class Flock {
 		std::array<double, 2> moveTowardCenterOfMass( const Boid & );
 		std::array<double, 2> keepDistanceFromObjects( const Boid & );
 		std::array<double, 2> matchVelocityWithOtherBoids( const Boid & );
+		std::array<double, 2> boundPosition( const Boid & );
 
 		void limitVelocity( Boid & );
 
