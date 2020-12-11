@@ -11,7 +11,12 @@ Flock::Flock( int screenWidth, int screenHeight, const Color &color ) {
 
 }
 
+void Flock::start() {
+	
+}
+
 void Flock::initialize( int boidsCount ) {
+
 	boids.resize( boidsCount );
 	for ( auto &boid : boids ) {
 		double vxRandom = std::rand() / ( ( RAND_MAX + 1u ) / 3 );
@@ -30,5 +35,8 @@ void Flock::initialize( int boidsCount ) {
 		double yRandom = std::rand() / ( ( RAND_MAX + 1u ) / screenHeight );
 		boid.location = Point( xRandom, yRandom );
 	}
+
+	monitor = FlockingMonitor( -1, -1 );
+
 }
 

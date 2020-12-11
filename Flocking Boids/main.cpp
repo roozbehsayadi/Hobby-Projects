@@ -5,6 +5,7 @@
 #include <string>
 
 #include "flock.h"
+#include "flockingMonitor.h"
 
 int main ( int argc, char **argv ) {
 
@@ -21,6 +22,8 @@ int main ( int argc, char **argv ) {
 
 	Flock flock( 1920, 1080 );
 	flock.initialize( atoi( argv[1] ) );
+
+	flock.start();
 
 	return 0;
 
