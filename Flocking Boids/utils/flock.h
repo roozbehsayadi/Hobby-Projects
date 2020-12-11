@@ -51,6 +51,9 @@ class Flock {
 
 		void limitVelocity( Boid & );
 
+		// used for interaction between different flocks.
+		static void keepDistanceFromAllObjects( std::vector<Flock *> & );
+
 	public:
 
 		// The first one does nothing.

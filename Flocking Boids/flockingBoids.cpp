@@ -39,6 +39,7 @@ void FlockingBoids::start() {
 			flock->moveBoids();
 			monitor->drawBoids( flock );
 		}
+		// Flock::keepDistanceFromAllObjects( flocks );
 		monitor->updateScreen();
 
 		std::chrono::duration<double> elapsedTime;

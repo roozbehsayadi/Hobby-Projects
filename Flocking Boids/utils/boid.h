@@ -28,8 +28,8 @@ class Boid {
 		Boid( int, int, double, double );
 		Boid( const Point &, double, double );
 		// Will get the first two elements of the iterable for location. 
-		template<typename Iter> Boid( int, int, Iter );
-		template<typename Iter> Boid( Iter );
+		// template<typename Iter> Boid( int, int, Iter );
+		// template<typename Iter> Boid( Iter );
 
 		static double getDistance( const Boid &, const Boid & );
 

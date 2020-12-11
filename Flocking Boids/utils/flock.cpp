@@ -85,7 +85,7 @@ std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid, std::vect
 	returnValue = { returnValue[0] / distsAndIndexes.size(), returnValue[1] / distsAndIndexes.size() };
 
 	returnValue = { returnValue[0] - boid.location.x, returnValue[1] - boid.location.y };
-	returnValue = { returnValue[0] / 100, returnValue[1] / 100 };
+	returnValue = { returnValue[0] / 50, returnValue[1] / 50 };
 
 	return returnValue;
 
@@ -147,6 +147,47 @@ void Flock::limitVelocity( Boid &boid ) {
 	double boidVelocityMagnitude = sqrt( pow( boid.velocity[0], 2 ) + pow( boid.velocity[1], 2 ) );
 	boid.velocity[0] = ( boid.velocity[0] / boidVelocityMagnitude ) * Flock::VELOCITY_LIMIT;
 	boid.velocity[1] = ( boid.velocity[1] / boidVelocityMagnitude ) * Flock::VELOCITY_LIMIT;
+
+}
+
+void Flock::keepDistanceFromAllObjects( std::vector<Flock*> &flocks ) {
+
+	int totalBoidsCount = 0;
+	for ( auto &flock : flocks ) 
+		totalBoidsCount += flock->boids.size();
+	Boid **allBoids = new Boid*[ totalBoidsCount ];
+//	std::vector<Boid*, std::allocator<Boid*>> allBoids;
+
+	int allBoidsCounter = 0;
+	for ( auto &flock : flocks ) 
+		for ( auto &boid : flock->boids )
+			allBoids[ allBoidsCounter++ ] = &boid;
+	
+	std::vector<std::pair<double, int>> distsAndIndexes;
+
+	for ( int i = 0; i < totalBoidsCount; i++ ) {
+		Boid &boid = *allBoids[ i ];
+		for ( int i = 0; i < totalBoidsCount; i++ )
+		
+		distsAndIndexes.push_back( std::make_pair( Boid::getDistance( *(allBoids[i]), boid ), i ) );
+
+		std::sort( distsAndIndexes.begin(), distsAndIndexes.end() );
+
+		distsAndIndexes = std::vector<std::pair<double, int>>( distsAndIndexes.begin() + 1, distsAndIndexes.begin() + std::min( Flock::VISUAL_RANGE, (int) distsAndIndexes.size() ) );
+
+		std::array<double, 2> deltaV = {0, 0};
+		for ( auto &otherBoidPair : distsAndIndexes ) {
+			Boid &otherBoid = *(allBoids[ otherBoidPair.second ]);
+			if ( Boid::getDistance( boid, otherBoid ) < 30 ) {
+				deltaV[0] -= ( otherBoid.location.x - boid.location.x ) / 10;
+				deltaV[1] -= ( otherBoid.location.y - boid.location.y ) / 10;
+			}
+		}
+
+		boid.velocity = { boid.velocity[0] + deltaV[0], boid.velocity[1] + deltaV[1] };
+
+	}
+
 
 }
 

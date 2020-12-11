@@ -35,7 +35,7 @@ int main ( int argc, char **argv ) {
 
 	srand( time( nullptr ) );
 
-	FlockingBoids flockingBoids( -1, -1 );
+	FlockingBoids flockingBoids( 1024, 768 );
 	for ( int i = 0; i < flocksCount; i++ )
 		flockingBoids.addFlock( totalBoidsCount / flocksCount, colors[ i ] );
 	flockingBoids.start();

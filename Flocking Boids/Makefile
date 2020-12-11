@@ -1,7 +1,7 @@
 all: main.o flockingBoids.o flock.o boid.o SDLHandler.o flockingMonitor.o point.o color.o
 	g++ *.o -o Flocking -Wall -O2 -g -std=c++11 -lSDL -lSDL_gfx
 run: 
-	./Flocking 3 198
+	./Flocking 2 50
 main.o: main.cpp 
 	g++ -c main.cpp 
 flockingBoids.o: flockingBoids.h flockingBoids.cpp
