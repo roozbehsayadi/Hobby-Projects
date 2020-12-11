@@ -2,7 +2,8 @@
 #include "flock.h"
 
 const int Flock::MARGIN = 30;
-const int Flock::VISUAL_RANGE = 20;
+const int Flock::VISUAL_RANGE = 10;
+const int Flock::VELOCITY_LIMIT = 25;
 
 Flock::Flock() {}
 
@@ -60,12 +61,14 @@ void Flock::moveBoids() {
 			boid.velocity[1] += vs[i][1];
 		}
 
+		limitVelocity( boid );
+
 		boid.location = { boid.location.x + boid.velocity[0], boid.location.y + boid.velocity[1] };
 	}
 
 }
 
-std::vector<std::pair<double, int>> Flock::getAllDistances( const Boid &boid ) {
+std::vector<std::pair<double, int>> Flock::getNearDistances( const Boid &boid ) {
 
 	std::vector<std::pair<double, int>> distsAndIndexes;
 
@@ -74,22 +77,22 @@ std::vector<std::pair<double, int>> Flock::getAllDistances( const Boid &boid ) {
 
 	std::sort( distsAndIndexes.begin(), distsAndIndexes.end() );
 
-	return std::vector<std::pair<double, int>>( distsAndIndexes.begin(), distsAndIndexes.begin() + std::min( Flock::VISUAL_RANGE, (int) distsAndIndexes.size() ) );
+	return std::vector<std::pair<double, int>>( distsAndIndexes.begin() + 1, distsAndIndexes.begin() + std::min( Flock::VISUAL_RANGE, (int) distsAndIndexes.size() ) );
 
 }
 
 std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
 
-	auto distsAndIndexes = getAllDistances( boid );
+	auto distsAndIndexes = getNearDistances( boid );
 
 	std::array<double, 2> returnValue = {0, 0};
-	for ( int i = 1; i <= distsAndIndexes.size() - 1; i++ ) {
+	// Why start from one? because I wanted to exclude the input boid.
+	for ( int i = 0; i < distsAndIndexes.size(); i++ ) {
 		returnValue[0] += boids[ distsAndIndexes[i].second ].location.x;
 		returnValue[1] += boids[ distsAndIndexes[i].second ].location.y;
 	}
 
-	int temp = std::min( Flock::VISUAL_RANGE, (int) distsAndIndexes.size() );
-	returnValue = { returnValue[0] / temp, returnValue[1] / temp };
+	returnValue = { returnValue[0] / distsAndIndexes.size(), returnValue[1] / distsAndIndexes.size() };
 
 	returnValue = { returnValue[0] - boid.location.x, returnValue[1] - boid.location.y };
 	returnValue = { returnValue[0] / 100, returnValue[1] / 100 };
@@ -100,32 +103,48 @@ std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
 
 std::array<double, 2> Flock::keepDistanceFromObjects( const Boid &boid ) { 
 
+	auto distsAndIndexes = getNearDistances( boid );
+
 	std::array<double, 2> returnValue = {0, 0};
 
-	for ( auto &otherBoid : boids )
-		if ( Boid::getDistance( boid, otherBoid ) < 20 ) {
-			returnValue[0] -= otherBoid.location.x - boid.location.x; 
+	for ( auto &otherBoidPair : distsAndIndexes ) {
+		Boid &otherBoid = boids[ otherBoidPair.second ];
+		if ( Boid::getDistance( boid, otherBoid ) < 30 ) {
+			returnValue[0] -= otherBoid.location.x - boid.location.x;
 			returnValue[1] -= otherBoid.location.y - boid.location.y;
 		}
-	
+	}
+
 	return returnValue;
 
 }
 
 std::array<double, 2> Flock::matchVelocityWithOtherBoids( const Boid &boid ) { 
 
+	auto distsAndIndexes = getNearDistances( boid );
+
 	std::array<double, 2> returnValue = {0, 0};
 
-	for ( auto &otherBoid : boids )
+	for ( auto &otherBoidPair : distsAndIndexes ) { 
+		Boid &otherBoid = boids[ otherBoidPair.second ];
 		returnValue = { returnValue[0] + otherBoid.velocity[0], returnValue[1] + otherBoid.velocity[1] };
-	
-	returnValue = { returnValue[0] / boids.size(), returnValue[1] / boids.size() };
+	}
+
+	returnValue = { returnValue[0] / distsAndIndexes.size(), returnValue[1] / distsAndIndexes.size() };
 
 	returnValue = { returnValue[0] - boid.velocity[0], returnValue[1] - boid.velocity[1] };
 
 	returnValue = { returnValue[0] / 8, returnValue[1] / 8 };
 
 	return returnValue;
+
+}
+
+void Flock::limitVelocity( Boid &boid ) {
+
+	double boidVelocityMagnitude = sqrt( pow( boid.velocity[0], 2 ) + pow( boid.velocity[1], 2 ) );
+	boid.velocity[0] = ( boid.velocity[0] / boidVelocityMagnitude ) * Flock::VELOCITY_LIMIT;
+	boid.velocity[1] = ( boid.velocity[1] / boidVelocityMagnitude ) * Flock::VELOCITY_LIMIT;
 
 }
 

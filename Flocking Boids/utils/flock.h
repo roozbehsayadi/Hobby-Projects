@@ -8,6 +8,7 @@
 #include <array>
 #include <vector>
 #include <algorithm>
+#include <math.h>
 
 #include "boid.h"
 #include "color.h"
@@ -25,6 +26,7 @@ class Flock {
 
 		static const int MARGIN;
 		static const int VISUAL_RANGE; //How many boids can a single boid see? 
+		static const int VELOCITY_LIMIT;
 
 		FlockingMonitor *monitor;
 
@@ -38,7 +40,7 @@ class Flock {
 		// Initializes the attributes of each boid with a random value.
 		void initializeRandomly( int );
 
-		std::vector<std::pair<double, int>> getAllDistances( const Boid & );
+		std::vector<std::pair<double, int>> getNearDistances( const Boid & );
 
 		// These functions are rules of Flocking Boid algorithm.
 		// They should all be run and then the velocity of boid
@@ -46,6 +48,8 @@ class Flock {
 		std::array<double, 2> moveTowardCenterOfMass( const Boid & );
 		std::array<double, 2> keepDistanceFromObjects( const Boid & );
 		std::array<double, 2> matchVelocityWithOtherBoids( const Boid & );
+
+		void limitVelocity( Boid & );
 
 	public:
 
