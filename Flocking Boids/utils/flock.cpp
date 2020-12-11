@@ -16,6 +16,10 @@ Flock::Flock( int screenWidth, int screenHeight, const Color &color ) {
 
 }
 
+Flock::~Flock() {
+	delete monitor;
+}
+
 void Flock::initializeRandomly( int boidsCount ) {
 
 	boids.resize( boidsCount );

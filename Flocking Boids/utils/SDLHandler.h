@@ -7,6 +7,10 @@
 
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
+#include "SDL/SDL_gfxPrimitives.h"
+
+#include "point.h"
+#include "color.h"
 
 class SDLHandler {
 
@@ -17,6 +21,8 @@ class SDLHandler {
 		// variable will change value to the screen's size accordingly.
 		static SDL_Surface *initWindow( std::string, int &, int & );
 		static SDL_Surface *loadIMG( std::string );
+		
+		static void drawCircle( SDL_Surface *, int, const Point &, const Color & );
 
 };
 

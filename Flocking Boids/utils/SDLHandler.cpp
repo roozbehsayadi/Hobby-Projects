@@ -47,3 +47,8 @@ SDL_Surface *loadIMG( std::string path ) {
 
 }
 
+void SDLHandler::drawCircle( SDL_Surface *screen, int radius, const Point &center, const Color &color ) {
+
+	filledCircleRGBA( screen, center.getX(), center.getY(), radius, color.r, color.g, color.b, 255 );
+
+}

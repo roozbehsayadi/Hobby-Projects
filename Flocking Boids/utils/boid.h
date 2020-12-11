@@ -11,6 +11,7 @@
 #include "point.h"
 
 class Flock;
+class FlockingMonitor;
 
 // Each boid in a flock is represented by this class.
 class Boid {
@@ -31,6 +32,7 @@ class Boid {
 
 
 	friend class Flock;
+	friend class FlockingMonitor;
 
 };
 

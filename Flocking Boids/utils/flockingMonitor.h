@@ -6,6 +6,7 @@
 
 #include "flock.h"
 #include "SDLHandler.h"
+#include "SDLEventType.h"
 
 class FlockingMonitor {
 
@@ -24,6 +25,10 @@ class FlockingMonitor {
 
 		// Closes the SDL stuff.
 		~FlockingMonitor();
+
+		SDLEventType handleEvents();
+		void drawBoids();
+		void updateScreen();
 
 };
 

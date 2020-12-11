@@ -32,9 +32,14 @@ class Flock {
 		Flock( int, int );
 		Flock( int, int, const Color & );
 
+		~Flock();
+
 		// Resizes the vector of Boids according to the first argument.
 		// Initializes the attributes of each boid with a random value.
 		void initializeRandomly( int );
+
+	friend class FlockingMonitor;
+	friend class FlockingBoids;
 
 
 };

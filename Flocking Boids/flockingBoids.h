@@ -3,17 +3,20 @@
 #define __FLOCKING_BOIDS_H
 
 #include "utils/flock.h"
+#include "utils/SDLEventType.h"
 
 class FlockingBoids {
 
 	private:
 
-		Flock flock;
+		Flock *flock;
 
 	public:
 
 		// -1 is for fullscreen.
 		FlockingBoids( int = 100, int = -1, int = -1, const Color & = {255, 255, 255} );
+
+		~FlockingBoids();
 
 		void start();
 

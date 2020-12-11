@@ -17,3 +17,25 @@ FlockingMonitor::~FlockingMonitor() {
 	SDL_Quit();
 }
 
+SDLEventType FlockingMonitor::handleEvents() {
+
+	SDL_Event event;
+	if ( SDL_PollEvent( &event ) )
+		if ( event.type == SDL_KEYDOWN )
+			if ( event.key.keysym.sym == SDLK_q )
+				return SDLEventType::QUIT;
+	return SDLEventType::NONE;
+
+}
+
+void FlockingMonitor::drawBoids() {
+
+	for ( auto &i : flock->boids )
+		SDLHandler::drawCircle( screen, 2, i.location, flock->color );
+
+}
+
+void FlockingMonitor::updateScreen() {
+	SDL_Flip( screen );
+}
+
