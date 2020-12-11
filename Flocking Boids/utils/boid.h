@@ -1,6 +1,6 @@
 
-#ifndef __BOID_H
-#define __BOID_H
+#ifndef __UTILS_BOID_H
+#define __UTILS_BOID_H
 
 #include <vector>
 #include <list>

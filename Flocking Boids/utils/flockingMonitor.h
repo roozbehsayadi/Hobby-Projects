@@ -1,6 +1,6 @@
 
-#ifndef __FLOCKING_MONITOR_H
-#define __FLOCKING_MONITOR_H
+#ifndef __UTILS_FLOCKING_MONITOR_H
+#define __UTILS_FLOCKING_MONITOR_H
 
 #include "SDL/SDL.h"
 

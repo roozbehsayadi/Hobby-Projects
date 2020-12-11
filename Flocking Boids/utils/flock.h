@@ -1,6 +1,6 @@
 
-#ifndef __FLOCK_H
-#define __FLOCK_H
+#ifndef __UTILS_FLOCK_H
+#define __UTILS_FLOCK_H
 
 #include <stdlib.h>
 #include <vector>
