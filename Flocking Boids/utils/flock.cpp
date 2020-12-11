@@ -47,9 +47,11 @@ void Flock::moveBoids() {
 
 	for ( auto &boid : boids ) {
 		std::vector<std::array<double, 2>> vs( 0 );
-		vs.push_back( moveTowardCenterOfMass( boid ) );
-		vs.push_back( keepDistanceFromObjects( boid ) );
-		vs.push_back( matchVelocityWithOtherBoids( boid ) );
+
+		auto distsAndIndexes = getNearDistances( boid );
+		vs.push_back( moveTowardCenterOfMass( boid, distsAndIndexes ) );
+		vs.push_back( keepDistanceFromObjects( boid, distsAndIndexes ) );
+		vs.push_back( matchVelocityWithOtherBoids( boid, distsAndIndexes ) );
 		vs.push_back( boundPosition( boid ) );
 		
 		for ( int i = 0; i < vs.size(); i++ ) {
@@ -77,9 +79,7 @@ std::vector<std::pair<double, int>> Flock::getNearDistances( const Boid &boid ) 
 
 }
 
-std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
-
-	auto distsAndIndexes = getNearDistances( boid );
+std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid, std::vector<std::pair<double, int>> distsAndIndexes ) {
 
 	std::array<double, 2> returnValue = {0, 0};
 	for ( int i = 0; i < distsAndIndexes.size(); i++ ) {
@@ -96,9 +96,7 @@ std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
 
 }
 
-std::array<double, 2> Flock::keepDistanceFromObjects( const Boid &boid ) { 
-
-	auto distsAndIndexes = getNearDistances( boid );
+std::array<double, 2> Flock::keepDistanceFromObjects( const Boid &boid, std::vector<std::pair<double, int>> distsAndIndexes ) { 
 
 	std::array<double, 2> returnValue = {0, 0};
 
@@ -114,9 +112,7 @@ std::array<double, 2> Flock::keepDistanceFromObjects( const Boid &boid ) {
 
 }
 
-std::array<double, 2> Flock::matchVelocityWithOtherBoids( const Boid &boid ) { 
-
-	auto distsAndIndexes = getNearDistances( boid );
+std::array<double, 2> Flock::matchVelocityWithOtherBoids( const Boid &boid, std::vector<std::pair<double, int>> distsAndIndexes ) { 
 
 	std::array<double, 2> returnValue = {0, 0};
 

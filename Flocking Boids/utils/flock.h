@@ -45,9 +45,9 @@ class Flock {
 		// These functions are rules of Flocking Boid algorithm.
 		// They should all be run and then the velocity of boid
 		// must be updated based on their output.
-		std::array<double, 2> moveTowardCenterOfMass( const Boid & );
-		std::array<double, 2> keepDistanceFromObjects( const Boid & );
-		std::array<double, 2> matchVelocityWithOtherBoids( const Boid & );
+		std::array<double, 2> moveTowardCenterOfMass( const Boid &, std::vector<std::pair<double, int>> );
+		std::array<double, 2> keepDistanceFromObjects( const Boid &, std::vector<std::pair<double, int>> );
+		std::array<double, 2> matchVelocityWithOtherBoids( const Boid &, std::vector<std::pair<double, int>> );
 		std::array<double, 2> boundPosition( const Boid & );
 
 		void limitVelocity( Boid & );
