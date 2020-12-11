@@ -1,23 +1,25 @@
 
 #include "flock.h"
 
+Flock::Flock() {}
+
 Flock::Flock( int screenWidth, int screenHeight ) : Flock( screenWidth, screenHeight, Color( 255, 255, 255 ) ) {}
 
 Flock::Flock( int screenWidth, int screenHeight, const Color &color ) {
+
 	boids.clear();
 	this->color.setColor( color );
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
 
+	monitor = new FlockingMonitor( this, this->screenWidth, this->screenHeight );
+
 }
 
-void Flock::start() {
-	
-}
-
-void Flock::initialize( int boidsCount ) {
+void Flock::initializeRandomly( int boidsCount ) {
 
 	boids.resize( boidsCount );
+
 	for ( auto &boid : boids ) {
 		double vxRandom = std::rand() / ( ( RAND_MAX + 1u ) / 3 );
 		double vyRandom = std::rand() / ( ( RAND_MAX + 1u ) / 3 );
@@ -35,8 +37,6 @@ void Flock::initialize( int boidsCount ) {
 		double yRandom = std::rand() / ( ( RAND_MAX + 1u ) / screenHeight );
 		boid.location = Point( xRandom, yRandom );
 	}
-
-	monitor = FlockingMonitor( -1, -1 );
 
 }
 

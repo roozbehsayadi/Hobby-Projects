@@ -3,7 +3,9 @@
 
 FlockingMonitor::FlockingMonitor() {}
 
-FlockingMonitor::FlockingMonitor( int screenWidth, int screenHeight ) {
+FlockingMonitor::FlockingMonitor( Flock *flock, int &screenWidth, int &screenHeight ) {
+
+	this->flock = flock;
 
 	SDLHandler::initSDL( SDL_INIT_EVERYTHING );
 

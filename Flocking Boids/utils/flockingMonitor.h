@@ -4,6 +4,7 @@
 
 #include "SDL/SDL.h"
 
+#include "flock.h"
 #include "SDLHandler.h"
 
 class FlockingMonitor {
@@ -11,6 +12,7 @@ class FlockingMonitor {
 	private: 
 
 		SDL_Surface *screen;
+		Flock *flock;
 
 	public:
 
@@ -18,7 +20,7 @@ class FlockingMonitor {
 		FlockingMonitor();
 		// Starts the SDL stuff.
 		// Pass -1 as the first argument to get a fullscreen window.
-		FlockingMonitor( int, int );
+		FlockingMonitor( Flock *, int &, int & );
 
 		// Closes the SDL stuff.
 		~FlockingMonitor();

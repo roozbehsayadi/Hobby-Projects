@@ -13,7 +13,9 @@ class SDLHandler {
 	public:
 	
 		static void initSDL( int );
-		static SDL_Surface *initWindow( std::string, int = 0, int = 0 );
+		// If -1 is passed as windowWidth and windowHeight, the passed
+		// variable will change value to the screen's size accordingly.
+		static SDL_Surface *initWindow( std::string, int &, int & );
 		static SDL_Surface *loadIMG( std::string );
 
 };

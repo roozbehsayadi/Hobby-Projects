@@ -13,7 +13,7 @@ void SDLHandler::initSDL( int flag ) {
 	}
 }
 
-SDL_Surface *SDLHandler::initWindow( std::string caption, int screenWidth, int screenHeight ) {
+SDL_Surface *SDLHandler::initWindow( std::string caption, int &screenWidth, int &screenHeight ) {
 
 	SDL_WM_SetCaption( caption.c_str(), NULL );
 

@@ -4,7 +4,7 @@
 #include <time.h>
 #include <string>
 
-#include "utils/flock.h"
+#include "flockingBoids.h"
 
 int main ( int argc, char **argv ) {
 
@@ -19,10 +19,8 @@ int main ( int argc, char **argv ) {
 
 	srand( time( nullptr ) );
 
-	Flock flock( 1920, 1080 );
-	flock.initialize( atoi( argv[1] ) );
-
-	flock.start();
+	FlockingBoids flockingBoids( atoi( argv[1] ), -1, -1 );
+	flockingBoids.start();
 
 	return 0;
 
