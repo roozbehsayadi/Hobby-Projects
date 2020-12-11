@@ -2,8 +2,8 @@
 #include "flock.h"
 
 const int Flock::MARGIN = 30;
-const int Flock::VISUAL_RANGE = 10;
-const int Flock::VELOCITY_LIMIT = 25;
+const int Flock::VISUAL_RANGE = 20;
+const int Flock::VELOCITY_LIMIT = 10;
 
 Flock::Flock() {}
 
@@ -82,7 +82,6 @@ std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
 	auto distsAndIndexes = getNearDistances( boid );
 
 	std::array<double, 2> returnValue = {0, 0};
-	// Why start from one? because I wanted to exclude the input boid.
 	for ( int i = 0; i < distsAndIndexes.size(); i++ ) {
 		returnValue[0] += boids[ distsAndIndexes[i].second ].location.x;
 		returnValue[1] += boids[ distsAndIndexes[i].second ].location.y;
@@ -106,8 +105,8 @@ std::array<double, 2> Flock::keepDistanceFromObjects( const Boid &boid ) {
 	for ( auto &otherBoidPair : distsAndIndexes ) {
 		Boid &otherBoid = boids[ otherBoidPair.second ];
 		if ( Boid::getDistance( boid, otherBoid ) < 30 ) {
-			returnValue[0] -= otherBoid.location.x - boid.location.x;
-			returnValue[1] -= otherBoid.location.y - boid.location.y;
+			returnValue[0] -= ( otherBoid.location.x - boid.location.x ) / 10;
+			returnValue[1] -= ( otherBoid.location.y - boid.location.y ) / 10;
 		}
 	}
 
