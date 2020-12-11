@@ -52,6 +52,8 @@ void Flock::moveBoids() {
 	for ( auto &boid : boids ) {
 		std::vector<std::array<double, 2>> vs( 0 );
 		vs.push_back( moveTowardCenterOfMass( boid ) );
+		vs.push_back( keepDistanceFromObjects( boid ) );
+		vs.push_back( matchVelocityWithOtherBoids( boid ) );
 		
 		for ( int i = 0; i < vs.size(); i++ ) {
 			boid.velocity[0] += vs[i][0];
@@ -63,7 +65,7 @@ void Flock::moveBoids() {
 
 }
 
-std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
+std::vector<std::pair<double, int>> Flock::getAllDistances( const Boid &boid ) {
 
 	std::vector<std::pair<double, int>> distsAndIndexes;
 
@@ -72,8 +74,16 @@ std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
 
 	std::sort( distsAndIndexes.begin(), distsAndIndexes.end() );
 
+	return std::vector<std::pair<double, int>>( distsAndIndexes.begin(), distsAndIndexes.begin() + std::min( Flock::VISUAL_RANGE, (int) distsAndIndexes.size() ) );
+
+}
+
+std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
+
+	auto distsAndIndexes = getAllDistances( boid );
+
 	std::array<double, 2> returnValue = {0, 0};
-	for ( int i = 1; i <= std::min( Flock::VISUAL_RANGE, (int) distsAndIndexes.size() - 1 ); i++ ) {
+	for ( int i = 1; i <= distsAndIndexes.size() - 1; i++ ) {
 		returnValue[0] += boids[ distsAndIndexes[i].second ].location.x;
 		returnValue[1] += boids[ distsAndIndexes[i].second ].location.y;
 	}
@@ -83,6 +93,37 @@ std::array<double, 2> Flock::moveTowardCenterOfMass( const Boid &boid ) {
 
 	returnValue = { returnValue[0] - boid.location.x, returnValue[1] - boid.location.y };
 	returnValue = { returnValue[0] / 100, returnValue[1] / 100 };
+
+	return returnValue;
+
+}
+
+std::array<double, 2> Flock::keepDistanceFromObjects( const Boid &boid ) { 
+
+	std::array<double, 2> returnValue = {0, 0};
+
+	for ( auto &otherBoid : boids )
+		if ( Boid::getDistance( boid, otherBoid ) < 20 ) {
+			returnValue[0] -= otherBoid.location.x - boid.location.x; 
+			returnValue[1] -= otherBoid.location.y - boid.location.y;
+		}
+	
+	return returnValue;
+
+}
+
+std::array<double, 2> Flock::matchVelocityWithOtherBoids( const Boid &boid ) { 
+
+	std::array<double, 2> returnValue = {0, 0};
+
+	for ( auto &otherBoid : boids )
+		returnValue = { returnValue[0] + otherBoid.velocity[0], returnValue[1] + otherBoid.velocity[1] };
+	
+	returnValue = { returnValue[0] / boids.size(), returnValue[1] / boids.size() };
+
+	returnValue = { returnValue[0] - boid.velocity[0], returnValue[1] - boid.velocity[1] };
+
+	returnValue = { returnValue[0] / 8, returnValue[1] / 8 };
 
 	return returnValue;
 

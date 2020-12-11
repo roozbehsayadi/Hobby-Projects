@@ -38,7 +38,14 @@ class Flock {
 		// Initializes the attributes of each boid with a random value.
 		void initializeRandomly( int );
 
+		std::vector<std::pair<double, int>> getAllDistances( const Boid & );
+
+		// These functions are rules of Flocking Boid algorithm.
+		// They should all be run and then the velocity of boid
+		// must be updated based on their output.
 		std::array<double, 2> moveTowardCenterOfMass( const Boid & );
+		std::array<double, 2> keepDistanceFromObjects( const Boid & );
+		std::array<double, 2> matchVelocityWithOtherBoids( const Boid & );
 
 	public:
 
