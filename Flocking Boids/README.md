@@ -45,6 +45,10 @@ An argument is also required to run the game. This is the number of boids in the
 
 Oh, and in fullscreen mode, you have to use the *q* button to close the program.
 
+## Screenshot
+
+[Screenshot](https://github.com/roozbehsayadi/Hobby-Projects/blob/master/Flocking%20Boids/Screenshot.png)
+
 ## Code structure
 
 The most important class in this project is ```FlockingBoids```. Create an instance of it and call the ```start``` method.
