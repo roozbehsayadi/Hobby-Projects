@@ -3,9 +3,7 @@
 
 FlockingMonitor::FlockingMonitor() {}
 
-FlockingMonitor::FlockingMonitor( Flock *flock, int &screenWidth, int &screenHeight ) {
-
-	this->flock = flock;
+FlockingMonitor::FlockingMonitor( int &screenWidth, int &screenHeight ) {
 
 	SDLHandler::initSDL( SDL_INIT_EVERYTHING );
 
@@ -31,7 +29,7 @@ SDLEventType FlockingMonitor::handleEvents() {
 
 }
 
-void FlockingMonitor::drawBoids() {
+void FlockingMonitor::drawBoids( Flock * flock ) {
 
 	boxRGBA( screen, 0, 0, screen->w, screen->h, 0, 0, 0, 30 );
 	//SDL_FillRect( screen, NULL, 0 );

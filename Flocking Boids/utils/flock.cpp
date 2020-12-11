@@ -7,19 +7,16 @@ const int Flock::VELOCITY_LIMIT = 10;
 
 Flock::Flock() {}
 
-Flock::Flock( int screenWidth, int screenHeight ) : Flock( screenWidth, screenHeight, Color( 255, 255, 255 ) ) {}
+Flock::Flock( FlockingMonitor * monitor ) : Flock( Color( 255, 255, 255 ), monitor ) {}
 
-Flock::Flock( int screenWidth, int screenHeight, const Color &color ) {
+Flock::Flock( const Color &color, FlockingMonitor *monitor  ) {
 
 	boids.clear();
+
 	this->color.setColor( color );
 
-	monitor = new FlockingMonitor( this, screenWidth, screenHeight );
+	this->monitor = monitor;
 
-}
-
-Flock::~Flock() {
-	delete monitor;
 }
 
 void Flock::initializeRandomly( int boidsCount ) {

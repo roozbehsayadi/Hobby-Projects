@@ -55,10 +55,8 @@ class Flock {
 
 		// The first one does nothing.
 		Flock();
-		Flock( int, int );
-		Flock( int, int, const Color & );
-
-		~Flock();
+		Flock( FlockingMonitor * );
+		Flock( const Color &, FlockingMonitor * );
 
 	friend class FlockingMonitor;
 	friend class FlockingBoids;

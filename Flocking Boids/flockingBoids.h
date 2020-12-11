@@ -3,8 +3,10 @@
 #define __FLOCKING_BOIDS_H
 
 #include <chrono>
+#include <vector>
 
 #include "utils/flock.h"
+#include "utils/flockingMonitor.h"
 #include "utils/SDLEventType.h"
 
 class FlockingBoids {
@@ -13,14 +15,19 @@ class FlockingBoids {
 
 		const static int FPS;
 
-		Flock *flock;
+		// Flock *flock;
+		FlockingMonitor *monitor;
+
+		std::vector<Flock*> flocks;
 
 	public:
 
 		// -1 is for fullscreen.
-		FlockingBoids( int = 100, int = -1, int = -1, const Color & = {255, 255, 255} );
+		FlockingBoids( int = -1, int = -1, const Color & = {255, 255, 255} );
 
 		~FlockingBoids();
+
+		void addFlock( int = 100, const Color & = {255, 255, 255 } );
 
 		void start();
 

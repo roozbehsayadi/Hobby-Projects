@@ -3,15 +3,27 @@
 
 const int FlockingBoids::FPS = 24;
 
-FlockingBoids::FlockingBoids( int count, int screenWidth, int screenHeight, const Color &color ) {
+FlockingBoids::FlockingBoids( int screenWidth, int screenHeight, const Color &color ) {
 
-	flock = new Flock( screenWidth, screenHeight, color );
-	flock->initializeRandomly( count );
+	monitor = new FlockingMonitor( screenWidth, screenHeight );
+
+	flocks.clear();
+
+	/* flock = new Flock( color, this->monitor );
+	flock->initializeRandomly( 100 ); */
 
 }
 
 FlockingBoids::~FlockingBoids() {
-	delete flock;
+	for ( auto &i : flocks ) 
+		delete i;
+	delete monitor;
+}
+
+void FlockingBoids::addFlock( int boidsCount, const Color &color  ) { 
+	Flock *temp = new Flock( color, this->monitor );
+	temp->initializeRandomly( boidsCount );
+	flocks.push_back( temp );
 }
 
 void FlockingBoids::start() {
@@ -20,12 +32,14 @@ void FlockingBoids::start() {
 
 		auto startTime = std::chrono::system_clock::now();
 	
-		SDLEventType eventType = flock->monitor->handleEvents();
+		SDLEventType eventType = monitor->handleEvents();
 		if ( eventType == SDLEventType::QUIT )
 			return;
-		flock->moveBoids();
-		flock->monitor->drawBoids();
-		flock->monitor->updateScreen();
+		for ( auto &flock : flocks ) {
+			flock->moveBoids();
+			monitor->drawBoids( flock );
+		}
+		monitor->updateScreen();
 
 		std::chrono::duration<double> elapsedTime;
 		do

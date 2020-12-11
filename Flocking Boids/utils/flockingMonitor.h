@@ -23,16 +23,17 @@ class FlockingMonitor {
 		FlockingMonitor();
 		// Starts the SDL stuff.
 		// Pass -1 as the first argument to get a fullscreen window.
-		FlockingMonitor( Flock *, int &, int & );
+		FlockingMonitor( int &, int & );
 
 		// Closes the SDL stuff.
 		~FlockingMonitor();
 
 		SDLEventType handleEvents();
-		void drawBoids();
+		void drawBoids( Flock *flock);
 		void updateScreen();
 	
 	friend class Flock;
+	friend class FlockingBoids;
 
 };
 
