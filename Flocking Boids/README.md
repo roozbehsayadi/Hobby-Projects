@@ -41,7 +41,7 @@ Running the code can be done with ```make run```.
 
 You can run the code yourself, simply execute the binary output with this command: ```./Flocking```.
 
-An argument is also required to run the game. This is the number of boids in the screen. For example, to have 100 boids on the screen, you should run this command: ```./Flocking 100```. High number of boids is not recommended because it'll eat your computer's performance like a... practically like A CHROME TAB.
+Two arguments are required to run the game. The first one is the number of different flocks (which'll be differed by their colors) and the second one is the total number of boids (which'll get divided evenly between different flocks). For example, to have 3 flocks with 200 boids (overall), run this command: ```./Flocking 3 200```. High number of boids is not recommended because it'll eat your computer's performance like a... practically like A CHROME TAB.
 
 Oh, and in fullscreen mode, you have to use the *q* button to close the program.
 
