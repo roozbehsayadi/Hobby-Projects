@@ -35,7 +35,8 @@ void SDLHandler::drawRotatedBox( SDL_Surface *screen, const Point &p1, const Poi
 	double deltaY = p2.getY() - p1.getY();
 	double deltaX = p2.getX() - p1.getX();
 	double angle = atan2( deltaX, deltaY );
-
+	
+	// calculate the 4 points of the box we need to draw for the trail of the boid
 	int16_t srcP1X = (int16_t) p1.getX() + width * cos( angle - M_PI / 2 );
 	int16_t srcP1Y = (int16_t) p1.getY() + width * sin( angle - M_PI / 2 );
 	int16_t srcP2X = (int16_t) p1.getX() + width * cos( angle + M_PI / 2 );
@@ -48,7 +49,8 @@ void SDLHandler::drawRotatedBox( SDL_Surface *screen, const Point &p1, const Poi
 
 	const int16_t vx[4] = { srcP1X, srcP2X, dstP1X, dstP2X };
 	const int16_t vy[4] = { srcP1Y, srcP2Y, dstP1Y, dstP2Y };
-
+	
+	// draw the polygon
 	filledPolygonRGBA( screen, vx, vy, 4, color.r, color.g, color.b, 255 );
 
 }

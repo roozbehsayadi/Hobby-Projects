@@ -9,9 +9,6 @@ FlockingBoids::FlockingBoids( int screenWidth, int screenHeight, const Color &co
 
 	flocks.clear();
 
-	/* flock = new Flock( color, this->monitor );
-	flock->initializeRandomly( 100 ); */
-
 }
 
 FlockingBoids::~FlockingBoids() {
@@ -39,6 +36,7 @@ void FlockingBoids::start() {
 			flock->moveBoids();
 			monitor->drawBoids( flock );
 		}
+		// I'll uncomment this line when I improve the performance of the program.
 		// Flock::keepDistanceFromAllObjects( flocks );
 		monitor->updateScreen();
 

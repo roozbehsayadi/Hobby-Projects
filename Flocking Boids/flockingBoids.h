@@ -15,7 +15,6 @@ class FlockingBoids {
 
 		const static int FPS;
 
-		// Flock *flock;
 		FlockingMonitor *monitor;
 
 		std::vector<Flock*> flocks;
