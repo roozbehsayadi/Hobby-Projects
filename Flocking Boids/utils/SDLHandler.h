@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <math.h>
 
 #include "SDL/SDL.h"
 #include "SDL/SDL_gfxPrimitives.h"
@@ -22,6 +23,7 @@ class SDLHandler {
 		static SDL_Surface *loadIMG( std::string );
 		
 		static void drawCircle( SDL_Surface *, int, const Point &, const Color & );
+		static void drawRotatedBox( SDL_Surface *, const Point &, const Point &, int, const Color & );
 
 };
 

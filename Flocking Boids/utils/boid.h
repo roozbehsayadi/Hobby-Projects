@@ -21,6 +21,7 @@ class Boid {
 
 		std::array<double, 2> velocity;
 		Point location;
+		Point prevLocation;
 
 	public:
 

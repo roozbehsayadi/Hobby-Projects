@@ -33,8 +33,10 @@ void FlockingMonitor::drawBoids( Flock * flock ) {
 
 	boxRGBA( screen, 0, 0, screen->w, screen->h, 0, 0, 0, 30 );
 	//SDL_FillRect( screen, NULL, 0 );
-	for ( auto &i : flock->boids )
-		SDLHandler::drawCircle( screen, 2, i.location, flock->color );
+	for ( auto &i : flock->boids ) {
+		SDLHandler::drawRotatedBox( screen, i.prevLocation, i.location, 3, flock->color );
+		SDLHandler::drawCircle( screen, 3, i.location, flock->color );
+	}
 
 }
 

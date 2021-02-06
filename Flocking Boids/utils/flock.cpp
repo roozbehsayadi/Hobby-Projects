@@ -33,7 +33,7 @@ void Flock::initializeRandomly( int boidsCount ) {
 		// source: https://en.cppreference.com/w/cpp/numeric/random/rand
 		double xRandom = std::rand() / ( ( RAND_MAX + 1u ) / this->monitor->screen->w );
 		double yRandom = std::rand() / ( ( RAND_MAX + 1u ) / this->monitor->screen->h );
-		boid.location = Point( xRandom, yRandom );
+		boid.prevLocation = boid.location = Point( xRandom, yRandom );
 	}
 
 }
@@ -56,6 +56,7 @@ void Flock::moveBoids() {
 
 		limitVelocity( boid );
 
+		boid.prevLocation = boid.location;
 		boid.location = { boid.location.x + boid.velocity[0], boid.location.y + boid.velocity[1] };
 	}
 
