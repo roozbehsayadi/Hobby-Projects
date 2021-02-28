@@ -8,6 +8,7 @@
 #include "SDL2/SDL.h"
 
 #include "../physical_objects/circle.h"
+#include "SDLEventType.h"
 
 class BBMonitor {
 
@@ -18,6 +19,7 @@ class BBMonitor {
 
 		void draw( const std::vector<Circle> & );
 		void update();
+		SDLEventType handleEvents();
 
 	private:
 

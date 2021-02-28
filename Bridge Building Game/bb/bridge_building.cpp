@@ -3,8 +3,17 @@
 
 void BridgeBuilding::start() {
 	while ( 1 ) {
+		delayer.startCounting();
+
+		SDLEventType eventType = monitor.handleEvents();
+		if ( eventType == SDLEventType::QUIT ) 
+			return;
+
 		monitor.draw( objects );
 		monitor.update();
+
+		objects[0].setColor( rand() % 256 );
+		delayer.wait();
 	}
 }
 

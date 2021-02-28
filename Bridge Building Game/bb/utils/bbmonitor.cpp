@@ -17,6 +17,20 @@ void BBMonitor::update() {
 	SDL_RenderPresent( renderer );
 }
 
+SDLEventType BBMonitor::handleEvents() {
+
+	SDL_Event event;
+	if ( SDL_PollEvent( &event ) ) {
+		if ( event.type == SDL_KEYDOWN )
+			if ( event.key.keysym.sym == SDLK_q )
+				return SDLEventType::QUIT;
+		if ( event.type == SDL_QUIT ) 
+			return SDLEventType::QUIT;
+	}
+	return SDLEventType::NONE;
+
+}
+
 BBMonitor::BBMonitor() {
 	if ( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) 
 		std::cerr << "SDL Could not be initialized. Error: " << SDL_GetError() << std::endl;

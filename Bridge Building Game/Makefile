@@ -1,4 +1,4 @@
-all: main.o bridge_building.o bbmonitor.o circle.o color.o
+all: main.o bridge_building.o bbmonitor.o circle.o color.o FPSDelayer.o 
 	g++ *.o -o Bridge\ Building.out -Wall -g -O2 -std=c++17 -lSDL2
 run: 
 	./Bridge\ Building.out 
@@ -12,5 +12,7 @@ circle.o: bb/physical_objects/circle.h bb/physical_objects/circle.cpp
 	g++ -c bb/physical_objects/circle.cpp 
 color.o: bb/utils/color.h bb/utils/color.cpp 
 	g++ -c bb/utils/color.cpp
+FPSDelayer.o: bb/utils/FPSDelayer.h bb/utils/FPSDelayer.cpp
+	g++ -c bb/utils/FPSDelayer.cpp
 clean: 
 	rm -rf *.o *.out
