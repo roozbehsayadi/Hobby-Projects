@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <vector>
 
-#include "physical_objects/circle.h"
+#include "physical_objects/object.h"
 #include "utils/bbmonitor.h"
 #include "utils/FPSDelayer.h"
 #include "utils/physics.h"
@@ -16,11 +16,11 @@ class BridgeBuilding {
 
 		void start();
 
-		void addObject( const Circle &circle );
+		void addObject( Object & );
 
 	private:
 
-		std::vector<Circle> objects;
+		std::vector<Object*> objects;
 		BBMonitor monitor;
 		FPSDelayer delayer;
 

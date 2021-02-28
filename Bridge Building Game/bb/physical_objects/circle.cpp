@@ -1,15 +1,21 @@
 
 #include "circle.h"
 
-Circle::Circle( double radius, double centerx, double centery, const Color &color ) {
+Circle::Circle( double radius, double density, double centerx, double centery, const Color &color ) : Object( density, color ) {
 	this->radius = radius;
 	this->center = std::make_pair( centerx, centery );
-	this->v = std::make_pair( 0.0, 0.0 );
-	this->color = color;
 }
 
-double Circle::getDensity() const {
-	return this->density;
+void Circle::move() {
+	auto temp = this->getCenter();
+	this->setCenter( std::make_pair( temp.first + this->getVelocityX(), temp.second + this->getVelocityY() ) );
+}
+
+void Circle::draw( std::function<void(int, int)> &drawer ) {
+	for ( int i = getCenter().first - getRadius(); i <= getCenter().first + getRadius(); i++ )
+		for ( int j = getCenter().second - getRadius(); j <= getCenter().second + getRadius(); j++ )
+			if ( pow( i - getCenter().first, 2 ) + pow( j - getCenter().second, 2 ) < pow( getRadius(), 2 ) )
+				drawer( i, j );
 }
 
 double Circle::getRadius() const {
@@ -18,29 +24,6 @@ double Circle::getRadius() const {
 
 const std::pair<double, double> &Circle::getCenter() const {
 	return center;
-}
-
-const std::pair<double, double> &Circle::getVelocity() const {
-	return v;
-}
-
-double Circle::getVelocityX() const {
-	return v.first;
-}
-
-double Circle::getVelocityY() const {
-	return v.second;
-}
-
-const Color &Circle::getColor() const {
-	return color;
-}
-
-bool Circle::setDensity( double density ) {
-	if ( density <= 0 )
-		return false;
-	this->density = density;
-	return true;
 }
 
 bool Circle::setRadius( double radius ) {
@@ -55,30 +38,10 @@ bool Circle::setCenter( const std::pair<double, double> &center ) {
 	return true;
 }
 
-bool Circle::setVelocity( const std::pair<double, double> &v ) {
-	this->v = v;
-	return true;
-}
-
-bool Circle::setVelocityX( double vx ) {
-	this->v.first = vx;
-	return true;
-}
-
-bool Circle::setVelocityY( double vy ) {
-	this->v.second = vy;
-	return true;
-}
-
-bool Circle::setColor( const Color &color ) {
-	this->color = color;
-	return true;
-}
-
 double Circle::getArea() const {
 	return M_PI * radius * radius;
 }
 
 double Circle::getMass() const {
-	return getArea() * density;
+	return this->getArea() * getDensity();
 }

@@ -12,12 +12,12 @@ class Physics {
 
 		const static double g;
 
-		static void applyPhysics( Circle &, int, int );
-		static void moveObject( Circle & );
+		static void applyPhysics( Object &, int, int );
+		// static void moveObject( Object & );
 
 	private:
 
-		static bool applyFloor( Circle &, int );
+		static bool applyFloor( Object &, int );
 
 };
 

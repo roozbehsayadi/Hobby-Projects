@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include <functional>
 
 #include "SDL2/SDL.h"
 
@@ -17,7 +18,7 @@ class BBMonitor {
 		BBMonitor();
 		~BBMonitor();
 
-		void draw( const std::vector<Circle> & );
+		void draw( std::vector<Object*> & );
 		void update();
 		void clearScreen();
 		SDLEventType handleEvents();

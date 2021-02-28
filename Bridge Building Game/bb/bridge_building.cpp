@@ -10,19 +10,18 @@ void BridgeBuilding::start() {
 			return;
 
 		for ( auto &i : objects ) { 
-			Physics::applyPhysics( i, monitor.getWidth(), monitor.getHeight() );
-			Physics::moveObject( i );
+			Physics::applyPhysics( *i, monitor.getWidth(), monitor.getHeight() );
+			i->move();
 		}
 
 		monitor.clearScreen();
 		monitor.draw( objects );
 		monitor.update();
 
-		// objects[0].setColor( rand() % 256 );
 		delayer.wait();
 	}
 }
 
-void BridgeBuilding::addObject( const Circle &circle ) {
-	objects.push_back( circle );
+void BridgeBuilding::addObject( Object &object ) {
+	objects.push_back( &object );
 }

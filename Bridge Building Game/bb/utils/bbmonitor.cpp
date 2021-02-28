@@ -1,15 +1,13 @@
 
 #include "bbmonitor.h"
 
-void BBMonitor::draw( const std::vector<Circle> &objects ) {
-	for ( Circle i : objects ) {
-		const Color colorTemp = i.getColor();
+void BBMonitor::draw( std::vector<Object*> &objects ) {
+	SDL_Renderer *temp = renderer;
+	std::function<void(int, int)> drawPixel = [temp](int x, int y) { SDL_RenderDrawPoint( temp, x, y ); };
+	for ( Object *&i : objects ) {
+		const Color colorTemp = i->getColor();
 		SDL_SetRenderDrawColor( renderer, colorTemp.getRed(), colorTemp.getGreen(), colorTemp.getBlue(), colorTemp.getAlpha() );
-		for ( int c1 = i.getCenter().first - i.getRadius(); c1 <= i.getCenter().first + i.getRadius(); c1++ )
-			for ( int c2 = i.getCenter().second - i.getRadius(); c2 <= i.getCenter().second + i.getRadius(); c2++ ) {
-				if ( pow( c1 - i.getCenter().first, 2) + pow( c2 - i.getCenter().second, 2 ) < pow( i.getRadius(), 2 ) )
-				SDL_RenderDrawPoint( renderer, c1, c2 );
-			}
+		i->draw( drawPixel );
 	}
 }
 

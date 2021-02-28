@@ -3,7 +3,7 @@
 
 const double Physics::g = 1.0;
 
-void Physics::applyPhysics( Circle &circle, int screenWidth, int screenHeight ) {
+void Physics::applyPhysics( Object &circle, int screenWidth, int screenHeight ) {
 	if ( !Physics::applyFloor( circle, screenHeight ) ) {
 		double Fy = 0;
 		Fy = -1 * circle.getMass() * Physics::g;
@@ -12,18 +12,19 @@ void Physics::applyPhysics( Circle &circle, int screenWidth, int screenHeight ) 
 	}
 }
 
-bool Physics::applyFloor( Circle &circle, int screenHeight ) {
-	if ( circle.getCenter().second + circle.getRadius() + circle.getVelocityY() >= screenHeight ) {
-		if ( fabs( circle.getVelocityY() ) < 2.0 )
-			circle.setVelocityY( 0.0 );
-		circle.setCenter( std::make_pair( circle.getCenter().first, screenHeight - circle.getRadius() ) );
-		circle.setVelocityY( -1 * circle.getVelocityY() * 0.95 );
+bool Physics::applyFloor( Object &object, int screenHeight ) {
+	Circle *c = (Circle*) &object;
+	if ( c->getCenter().second + c->getRadius() + c->getVelocityY() >= screenHeight ) {
+		if ( fabs( object.getVelocityY() ) < 2.0 )
+			object.setVelocityY( 0.0 );
+		c->setCenter( std::make_pair( c->getCenter().first, screenHeight - c->getRadius() ) );
+		c->setVelocityY( -1 * object.getVelocityY() * 0.95 );
 		return true;
 	}
 	return false;
 }
 
-void Physics::moveObject( Circle &circle ) {
-	auto temp = circle.getCenter();
-	circle.setCenter( std::make_pair( temp.first + circle.getVelocityX(), temp.second + circle.getVelocityY() ) );
-}
+// void Physics::moveObject( Object &object ) {
+// 	auto temp = object.getCenter();
+// 	circle.setCenter( std::make_pair( temp.first + circle.getVelocityX(), temp.second + circle.getVelocityY() ) );
+// }
