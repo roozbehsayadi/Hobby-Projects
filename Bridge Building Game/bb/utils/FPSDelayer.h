@@ -12,11 +12,13 @@ class FPSDelayer {
 
 		void startCounting();
 		void wait();
+		// Returns the passed time (since the startCounting() is called) in seconds.
+		std::chrono::duration<double> passedTime();
 
 	private:
 
 		const int FPS;
-		decltype(std::chrono::system_clock::now()) startTime;
+		std::chrono::system_clock::time_point startTime;
 
 };
 

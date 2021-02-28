@@ -13,3 +13,7 @@ void FPSDelayer::wait() {
 		elapsedTime = std::chrono::system_clock::now() - startTime;
 	while ( elapsedTime.count() < ( 1.0 / FPS ) );
 }
+
+std::chrono::duration<double> FPSDelayer::passedTime() {
+	return std::chrono::system_clock::now() - startTime;
+}
