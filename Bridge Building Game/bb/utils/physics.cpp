@@ -14,6 +14,9 @@ void Physics::applyPhysics( Circle &circle, int screenWidth, int screenHeight ) 
 
 bool Physics::applyFloor( Circle &circle, int screenHeight ) {
 	if ( circle.getCenter().second + circle.getRadius() + circle.getVelocityY() >= screenHeight ) {
+		std::cout << circle.getVelocityY() << std::endl;
+		if ( fabs( circle.getVelocityY() ) < 2.0 )
+			circle.setVelocityY( 0.0 );
 		circle.setCenter( std::make_pair( circle.getCenter().first, screenHeight - circle.getRadius() ) );
 		circle.setVelocityY( -1 * circle.getVelocityY() * 0.95 );
 		return true;
