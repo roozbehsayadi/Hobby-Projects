@@ -11,7 +11,7 @@ class FPSDelayer {
 
 		// Arguments:
 		// - FPS (default = 30)
-		FPSDelayer( int = 30 );
+		FPSDelayer( int = 60 );
 
 		// Stores the time that this functions
 		// was called in a variable.

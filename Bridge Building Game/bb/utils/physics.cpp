@@ -1,10 +1,16 @@
 
 #include "physics.h"
 
-const double Physics::g = 1.0;
+const double Physics::g = 5.0;
 
 void Physics::applyPhysics( Object &circle, int screenWidth, int screenHeight ) {
 	if ( !Physics::applyFloor( circle, screenHeight ) ) {
+		Circle *c = (Circle*) &circle;
+		bool b = ( fabs( c->getVelocityY() ) < Physics::g ) && ( c->getCenter().second + c->getRadius() + fabs( c->getVelocityY() ) + 10 >= screenHeight );
+		if ( b ) {
+			c->setVelocityY( 0.0 );
+			return;
+		}
 		double Fy = 0;
 		Fy = -1 * circle.getMass() * Physics::g;
 		double ay = Fy / circle.getMass();
@@ -14,10 +20,11 @@ void Physics::applyPhysics( Object &circle, int screenWidth, int screenHeight ) 
 
 bool Physics::applyFloor( Object &object, int screenHeight ) {
 	Circle *c = (Circle*) &object;
-	if ( c->getCenter().second + c->getRadius() + c->getVelocityY() >= screenHeight ) {
-		if ( fabs( object.getVelocityY() ) < 2.0 )
-			object.setVelocityY( 0.0 );
+	bool b = c->getCenter().second + c->getRadius() + c->getVelocityY() >= screenHeight;
+	if ( b ) {
 		c->setCenter( std::make_pair( c->getCenter().first, screenHeight - c->getRadius() ) );
+		if ( fabs( object.getVelocityY() ) < Physics::g * 2 )
+			c->setVelocityY( 0.0 );
 		c->setVelocityY( -1 * object.getVelocityY() * 0.95 );
 		return true;
 	}
