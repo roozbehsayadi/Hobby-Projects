@@ -4,6 +4,7 @@
 Circle::Circle( double radius, double centerx, double centery, const Color &color ) {
 	this->radius = radius;
 	this->center = std::make_pair( centerx, centery );
+	this->v = std::make_pair( 0.0, 0.0 );
 	this->color = color;
 }
 
@@ -17,6 +18,18 @@ double Circle::getRadius() const {
 
 const std::pair<double, double> &Circle::getCenter() const {
 	return center;
+}
+
+const std::pair<double, double> &Circle::getVelocity() const {
+	return v;
+}
+
+double Circle::getVelocityX() const {
+	return v.first;
+}
+
+double Circle::getVelocityY() const {
+	return v.second;
 }
 
 const Color &Circle::getColor() const {
@@ -39,6 +52,21 @@ bool Circle::setRadius( double radius ) {
 
 bool Circle::setCenter( const std::pair<double, double> &center ) {
 	this->center = center;
+	return true;
+}
+
+bool Circle::setVelocity( const std::pair<double, double> &v ) {
+	this->v = v;
+	return true;
+}
+
+bool Circle::setVelocityX( double vx ) {
+	this->v.first = vx;
+	return true;
+}
+
+bool Circle::setVelocityY( double vy ) {
+	this->v.second = vy;
 	return true;
 }
 

@@ -7,6 +7,8 @@
 
 #include "../utils/color.h"
 
+class Physics;
+
 class Circle {
 
 	public:
@@ -16,11 +18,17 @@ class Circle {
 		double getDensity() const;
 		double getRadius() const;
 		const std::pair<double, double> &getCenter() const;
+		const std::pair<double, double> &getVelocity() const;
+		double getVelocityX() const;
+		double getVelocityY() const;
 		const Color &getColor() const;
 
 		bool setDensity( double );
 		bool setRadius( double );
 		bool setCenter( const std::pair<double, double> & );
+		bool setVelocity( const std::pair<double, double> & );
+		bool setVelocityX( double );
+		bool setVelocityY( double );
 		bool setColor( const Color & );
 
 	private:
@@ -28,10 +36,13 @@ class Circle {
 		double density;
 		double radius;
 		std::pair<double, double> center;
+		std::pair<double, double> v;
 		Color color;
 
 		double getArea() const;
 		double getMass() const;
+	
+	friend class Physics;
 
 };
 

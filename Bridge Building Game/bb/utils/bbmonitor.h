@@ -19,12 +19,16 @@ class BBMonitor {
 
 		void draw( const std::vector<Circle> & );
 		void update();
+		void clearScreen();
 		SDLEventType handleEvents();
+
+		int getWidth() const;
+		int getHeight() const;
 
 	private:
 
 		SDL_Window *window;
-		SDL_Surface *screenSurface;
+		// SDL_Surface *screenSurface;
 		SDL_Renderer *renderer;
 		SDL_Texture *texture;
 

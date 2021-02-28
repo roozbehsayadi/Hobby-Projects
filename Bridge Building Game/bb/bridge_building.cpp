@@ -9,10 +9,16 @@ void BridgeBuilding::start() {
 		if ( eventType == SDLEventType::QUIT ) 
 			return;
 
+		for ( auto &i : objects ) { 
+			Physics::applyPhysics( i, monitor.getWidth(), monitor.getHeight() );
+			Physics::moveObject( i );
+		}
+
+		monitor.clearScreen();
 		monitor.draw( objects );
 		monitor.update();
 
-		objects[0].setColor( rand() % 256 );
+		// objects[0].setColor( rand() % 256 );
 		delayer.wait();
 	}
 }

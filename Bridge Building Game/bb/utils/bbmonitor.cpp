@@ -17,6 +17,14 @@ void BBMonitor::update() {
 	SDL_RenderPresent( renderer );
 }
 
+void BBMonitor::clearScreen() {
+	int width, height;
+	SDL_GetWindowSize( window, &width, &height );
+	SDL_Rect fillRect = {0, 0, width, height};
+	SDL_SetRenderDrawColor( renderer, 30, 30, 30, 255 );
+	SDL_RenderFillRect( renderer, &fillRect );
+}
+
 SDLEventType BBMonitor::handleEvents() {
 
 	SDL_Event event;
@@ -31,6 +39,18 @@ SDLEventType BBMonitor::handleEvents() {
 
 }
 
+int BBMonitor::getWidth() const {
+	int returnValue, foo;
+	SDL_GetWindowSize( window, &returnValue, &foo );
+	return returnValue;
+}
+
+int BBMonitor::getHeight() const {
+	int returnValue, foo;
+	SDL_GetWindowSize( window, &foo, &returnValue );
+	return returnValue;
+}
+
 BBMonitor::BBMonitor() {
 	if ( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) 
 		std::cerr << "SDL Could not be initialized. Error: " << SDL_GetError() << std::endl;
@@ -39,6 +59,7 @@ BBMonitor::BBMonitor() {
 		if ( window == NULL ) 
 			std::cerr << "Window could not be created. Error: " << SDL_GetError() << std::endl;
 		else {
+			// screenSurface = SDL_GetWindowSurface( window );
 			renderer = SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED );
 			if ( renderer == NULL ) 
 				std::cerr << "Renderer could not be initialized. Error: " << SDL_GetError() << std::endl;
