@@ -23,8 +23,3 @@ bool Physics::applyFloor( Object &object, int screenHeight ) {
 	}
 	return false;
 }
-
-// void Physics::moveObject( Object &object ) {
-// 	auto temp = object.getCenter();
-// 	circle.setCenter( std::make_pair( temp.first + circle.getVelocityX(), temp.second + circle.getVelocityY() ) );
-// }

@@ -11,19 +11,28 @@
 #include "../physical_objects/circle.h"
 #include "SDLEventType.h"
 
+// Monitor for Bridge Building.
 class BBMonitor {
 
 	public:
 
+		// Initializes SDL stuff.
 		BBMonitor();
+		// Closes SDL stuff.
 		~BBMonitor();
 
+		// Gets a vector of objects, and draws them on the screen.
 		void draw( std::vector<Object*> & );
+		// Updates the screen.
 		void update();
+		// Fills the background with background color.
 		void clearScreen();
+		// Checks if any event happened, and returns the type of event.
 		SDLEventType handleEvents();
 
+		// Returns the width of the screen.
 		int getWidth() const;
+		// Returns the height of the screen.
 		int getHeight() const;
 
 	private:

@@ -10,6 +10,10 @@
 #include "utils/FPSDelayer.h"
 #include "utils/physics.h"
 
+// Main class for Bridge Building.
+// Usage: Create an instance of class, 
+// add objects to it using addObject()
+// function, then call start().
 class BridgeBuilding {
 
 	public:

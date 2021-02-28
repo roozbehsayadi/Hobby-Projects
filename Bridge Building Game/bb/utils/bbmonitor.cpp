@@ -19,7 +19,7 @@ void BBMonitor::clearScreen() {
 	int width, height;
 	SDL_GetWindowSize( window, &width, &height );
 	SDL_Rect fillRect = {0, 0, width, height};
-	SDL_SetRenderDrawColor( renderer, 30, 30, 30, 255 );
+	SDL_SetRenderDrawColor( renderer, 50, 50, 50, 255 );
 	SDL_RenderFillRect( renderer, &fillRect );
 }
 

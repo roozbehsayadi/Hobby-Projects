@@ -8,25 +8,41 @@
 
 #include "../utils/color.h"
 
+// Parent class for all objects on the screen.
 class Object {
 
 	public:
 
+		// Arguments:
+		// - density
+		// - color of the object
 		Object( double, const Color & );
 
+		// Move the object based on velocity.
 		virtual void move() = 0;
+		// Draw the object on the screen.
 		virtual void draw( std::function<void(int, int)> & ) = 0;
 
+		// Getter for density.
 		double getDensity() const;
+		// Getter for velocity vector.
 		const std::pair<double, double> &getVelocity() const;
+		// Getter for x velocity.
 		double getVelocityX() const;
+		// Getter for y velocity.
 		double getVelocityY() const;
+		// Getter for color of the object.
 		const Color &getColor() const;
 
+		// Setter for density.
 		bool setDensity( double );
+		// Setter for velocity vector.
 		bool setVelocity( const std::pair<double, double> & );
+		// Setter for x velocity.
 		bool setVelocityX( double );
+		// Setter for y velocity.
 		bool setVelocityY( double );
+		// Setter for color of the object.
 		bool setColor( const Color & );
 
 	private:
