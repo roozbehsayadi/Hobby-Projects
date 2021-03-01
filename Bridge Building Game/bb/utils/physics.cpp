@@ -1,21 +1,28 @@
 
 #include "physics.h"
 
-const double Physics::g = 5.0;
+const double Physics::g = 0.5;
 
-void Physics::applyPhysics( Object &circle, int screenWidth, int screenHeight ) {
-	if ( !Physics::applyFloor( circle, screenHeight ) ) {
-		Circle *c = (Circle*) &circle;
-		bool b = ( fabs( c->getVelocityY() ) < Physics::g ) && ( c->getCenter().second + c->getRadius() + fabs( c->getVelocityY() ) + 10 >= screenHeight );
-		if ( b ) {
-			c->setVelocityY( 0.0 );
-			return;
+void Physics::applyPhysics( std::vector<Object*> &objects, int screenWidth, int screenHeight ) {
+	static Timer timer;
+	for ( auto &i : objects ) {
+		Circle *c = (Circle*) i;
+		if ( !Physics::applyFloor( *i, screenHeight ) ) {
+			bool b = ( fabs( c->getVelocityY() ) < Physics::g ) && ( c->getCenter().second + c->getRadius() + fabs( c->getVelocityY() ) + 10 >= screenHeight );
+			if ( b ) {
+				c->setVelocityY( 0.0 );
+				return;
+			}
+			double Fy = 0;
+			Fy = -1 * c->getMass() * Physics::g;
+			double ay = Fy / c->getMass();
+			c->setAcceleratoinY( -1 * ay );
 		}
-		double Fy = 0;
-		Fy = -1 * circle.getMass() * Physics::g;
-		double ay = Fy / circle.getMass();
-		circle.setVelocityY( circle.getVelocityY() - ay );
+		double timeTemp = timer.passedTime().count();
+		i->move( timeTemp );
+		c->setVelocityY( c->getVelocityY() + c->getAccelerationY() * timeTemp );
 	}
+	timer.startCounting();
 }
 
 bool Physics::applyFloor( Object &object, int screenHeight ) {

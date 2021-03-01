@@ -1,6 +1,10 @@
 
 #include "bridge_building.h"
 
+BridgeBuilding::BridgeBuilding( double meters ) {
+	ScreenScale::getInstance()->init( meters );
+}
+
 void BridgeBuilding::start() {
 
 	// Main loop of the program.
@@ -17,10 +21,11 @@ void BridgeBuilding::start() {
 
 		// Loop through all objects, apply physics to them
 		// and move them based on the physical conditions.
-		for ( auto &i : objects ) { 
-			Physics::applyPhysics( *i, monitor.getWidth(), monitor.getHeight() );
-			i->move();
-		}
+		// for ( auto &i : objects ) { 
+		// 	Physics::applyPhysics( *i, monitor.getWidth(), monitor.getHeight() );
+		// 	i->move();
+		// }
+		Physics::applyPhysics( objects, monitor.getWidth(), monitor.getHeight() );
 
 		// Now that all objects have moved to their place,
 		// we must clear the screen, draw all the objects on

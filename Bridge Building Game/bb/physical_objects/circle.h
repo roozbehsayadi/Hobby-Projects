@@ -3,12 +3,14 @@
 #define __BRIDGE_BUILDING_CIRCLE_H
 
 #include <iostream>
+#include <iomanip>
 #include <utility>
 #include <functional>
 #include <math.h>
 
 #include "../utils/color.h"
 #include "object.h"
+#include "../utils/screenScale.h"
 
 class Physics;
 
@@ -18,15 +20,15 @@ class Circle : public Object {
 	public:
 
 		// Arguments:
-		// - radius
+		// - radius (meters)
 		// - density
-		// - x of center
-		// - y of center
+		// - x of center (meters)
+		// - y of center (meters)
 		// - color (default = black)
 		Circle( double, double, double, double, const Color & = {0, 0, 0} );
 
 		// Move the object based on the velocity.
-		virtual void move() override;
+		virtual void move( double ) override;
 		// Draw the object on the screen.
 		// Arguments:
 		// - A function with no return value and two int inputs. This function must draw a point on some screen (but we don't care for that here. Isn't it beautiful?).
@@ -49,6 +51,8 @@ class Circle : public Object {
 
 		virtual double getArea() const override;
 		virtual double getMass() const override;
+
+	friend class Physics;
 
 };
 

@@ -35,6 +35,9 @@ class BBMonitor {
 		// Returns the height of the screen.
 		int getHeight() const;
 
+		// returns width and height of the monitor.
+		static std::pair<int, int> getMonitorSize();
+
 	private:
 
 		SDL_Window *window;

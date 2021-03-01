@@ -49,6 +49,12 @@ int BBMonitor::getHeight() const {
 	return returnValue;
 }
 
+std::pair<int, int> BBMonitor::getMonitorSize() {
+	SDL_DisplayMode dm;
+	SDL_GetCurrentDisplayMode( 0, &dm );
+	return std::make_pair( dm.w, dm.h );
+}
+
 BBMonitor::BBMonitor() {
 	if ( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ) 
 		std::cerr << "SDL Could not be initialized. Error: " << SDL_GetError() << std::endl;

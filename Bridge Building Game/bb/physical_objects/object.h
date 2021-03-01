@@ -19,7 +19,7 @@ class Object {
 		Object( double, const Color & );
 
 		// Move the object based on velocity.
-		virtual void move() = 0;
+		virtual void move( double ) = 0;
 		// Draw the object on the screen.
 		virtual void draw( std::function<void(int, int)> & ) = 0;
 
@@ -31,6 +31,12 @@ class Object {
 		double getVelocityX() const;
 		// Getter for y velocity.
 		double getVelocityY() const;
+		// Getter for acceleration vector.
+		const std::pair<double, double> &getAcceleration() const;
+		// Getter for x acceleration.
+		double getAccelerationX() const;
+		// Getter for y acceleration.
+		double getAccelerationY() const;
 		// Getter for color of the object.
 		const Color &getColor() const;
 
@@ -42,6 +48,12 @@ class Object {
 		bool setVelocityX( double );
 		// Setter for y velocity.
 		bool setVelocityY( double );
+		// Setter for acceleration vector.
+		bool setAcceleration( const std::pair<double, double> & );
+		// Setter for x acceleration.
+		bool setAccelerationX( double );
+		// Setter for y acceleration.
+		bool setAcceleratoinY( double );
 		// Setter for color of the object.
 		bool setColor( const Color & );
 
@@ -49,6 +61,7 @@ class Object {
 
 		double density;
 		std::pair<double, double> v;
+		std::pair<double, double> a;
 
 		Color color;
 

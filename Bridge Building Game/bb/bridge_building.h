@@ -7,8 +7,9 @@
 
 #include "physical_objects/object.h"
 #include "utils/bbmonitor.h"
-#include "utils/FPSDelayer.h"
+#include "utils/timers/FPSDelayer.h"
 #include "utils/physics.h"
+#include "utils/screenScale.h"
 
 // Main class for Bridge Building.
 // Usage: Create an instance of class, 
@@ -17,6 +18,10 @@
 class BridgeBuilding {
 
 	public:
+
+		// Arguments:
+		// - Scale of the screen. how many meters is the width of the screen?
+		BridgeBuilding( double );
 
 		void start();
 
