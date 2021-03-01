@@ -7,15 +7,8 @@ Circle::Circle( double radius, double density, double centerx, double centery, c
 }
 
 void Circle::move( double deltaT ) {
-	std::cout << std::left;
-	std::cout << std::setw( 9 ) << "a: " << getAccelerationY() << std::endl;
-	std::cout << std::setw( 9 ) << "deltaT: " << deltaT << std::endl;
-	std::cout << std::setw( 9 ) << "V0: " << getVelocityY() << std::endl;
-	std::cout << std::setw( 9 ) << "Y0: " << getCenter().second << std::endl;
-	auto temp = this->getCenter();
 	double newXMeters = 0.5 * getAccelerationX() * deltaT * deltaT + getVelocityX() * deltaT + getCenter().first;
 	double newYMeters = 0.5 * getAccelerationY() * deltaT * deltaT + getVelocityY() * deltaT + getCenter().second;
-	std::cout << "New Y Meters: " << newYMeters << std::endl;
 	this->setCenter( std::make_pair( newXMeters, newYMeters ));
 }
 
@@ -29,14 +22,10 @@ void Circle::draw( std::function<void(int, int)> &drawer ) {
 	double centerYPixels = ScreenScale::getInstance()->getPixels( getCenter().second );
 	double radiusPixels = ScreenScale::getInstance()->getPixels( getRadius() );
 
-	std::cout << xStart << ' ' << xEnd << ' ' << yStart << ' ' << yEnd << std::endl;
-
 	for ( int i = xStart; i <= xEnd; i++ )
 		for ( int j = yStart; j <= yEnd; j++ )
 			if ( pow( i - centerXPixels, 2 ) + pow( j - centerYPixels, 2 ) < pow( radiusPixels, 2 ) )
 				drawer( i, j );	
-
-	// exit( 0 );
 
 }
 
