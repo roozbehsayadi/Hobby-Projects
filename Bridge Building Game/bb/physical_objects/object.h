@@ -19,7 +19,7 @@ class Object {
 		Object( double, const Color & );
 
 		// Move the object based on velocity.
-		virtual void move( double ) = 0;
+		virtual void move( double , int ) = 0;
 		// Draw the object on the screen.
 		virtual void draw( std::function<void(int, int)> & ) = 0;
 

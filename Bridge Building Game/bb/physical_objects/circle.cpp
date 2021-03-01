@@ -6,10 +6,23 @@ Circle::Circle( double radius, double density, double centerx, double centery, c
 	this->center = std::make_pair( centerx, centery );
 }
 
-void Circle::move( double deltaT ) {
+void Circle::move( double deltaT, int screenHeight ) {
 	double newXMeters = 0.5 * getAccelerationX() * deltaT * deltaT + getVelocityX() * deltaT + getCenter().first;
 	double newYMeters = 0.5 * getAccelerationY() * deltaT * deltaT + getVelocityY() * deltaT + getCenter().second;
-	this->setCenter( std::make_pair( newXMeters, newYMeters ));
+	if ( ScreenScale::getInstance()->getPixels( newYMeters + getRadius() ) >= screenHeight ) {
+		double deltaY = ScreenScale::getInstance()->getMeters( screenHeight ) - ( getCenter().second + getRadius() );
+		double velocityWhenReachedFloor = sqrt( ( 2 * getAccelerationY() * deltaY ) + pow( getVelocityY(), 2) );
+		double timeToReachFloor = ( velocityWhenReachedFloor - getVelocityY() ) / getAccelerationY();
+		this->setCenter( std::make_pair(
+			newXMeters,
+			ScreenScale::getInstance()->getMeters( screenHeight ) - getRadius()
+		) );
+		std::cout << getVelocityY() << ' ' << velocityWhenReachedFloor << std::endl;
+		this->setVelocityY( -1 * velocityWhenReachedFloor );
+		move( deltaT - timeToReachFloor, screenHeight );
+	}
+	else
+		this->setCenter( std::make_pair( newXMeters, newYMeters ));
 }
 
 void Circle::draw( std::function<void(int, int)> &drawer ) {

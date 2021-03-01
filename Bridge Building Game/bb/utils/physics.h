@@ -24,12 +24,6 @@ class Physics {
 
 	private:
 
-		// Arguments:
-		// - Object to be handled
-		// Output:
-		// - Did the object hit the floor?
-		static bool applyFloor( Object &, int );
-
 };
 
 #endif

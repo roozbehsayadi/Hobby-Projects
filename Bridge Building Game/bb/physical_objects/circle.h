@@ -28,7 +28,7 @@ class Circle : public Object {
 		Circle( double, double, double, double, const Color & = {0, 0, 0} );
 
 		// Move the object based on the velocity.
-		virtual void move( double ) override;
+		virtual void move( double, int ) override;
 		// Draw the object on the screen.
 		// Arguments:
 		// - A function with no return value and two int inputs. This function must draw a point on some screen (but we don't care for that here. Isn't it beautiful?).
