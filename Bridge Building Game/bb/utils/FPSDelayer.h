@@ -10,7 +10,7 @@ class FPSDelayer {
 	public:
 
 		// Arguments:
-		// - FPS (default = 30)
+		// - FPS (default = 60)
 		FPSDelayer( int = 60 );
 
 		// Stores the time that this functions
@@ -19,7 +19,8 @@ class FPSDelayer {
 		// Waits some amount of time in order to
 		// keep the FPS at the wanted order.
 		void wait();
-		// Returns the passed time (since the startCounting() is called) in seconds.
+		// Returns the passed time (since the startCounting() is called).
+		// call count() member function for output to get the time in seconds.
 		std::chrono::duration<double> passedTime();
 
 	private:
