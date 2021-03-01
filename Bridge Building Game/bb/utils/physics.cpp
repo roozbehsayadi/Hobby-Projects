@@ -1,7 +1,7 @@
 
 #include "physics.h"
 
-const double Physics::g = 4.9;
+const double Physics::g = 1.0;
 
 void Physics::applyPhysics( std::vector<Object*> &objects, int screenWidth, int screenHeight ) {
 	static Timer timer;
