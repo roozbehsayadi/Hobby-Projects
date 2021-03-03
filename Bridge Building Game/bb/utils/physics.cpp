@@ -13,7 +13,6 @@ void Physics::applyPhysics( std::vector<Object*> &objects, int screenWidth, int 
 		double ay = Fy / c->getMass();
 		c->setAcceleratoinY( ay );
 		i->move( timeTemp, screenHeight );
-		c->setVelocityY( c->getVelocityY() + c->getAccelerationY() * timeTemp );
 	}
 	timer.startCounting();
 }

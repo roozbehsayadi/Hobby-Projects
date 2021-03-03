@@ -22,8 +22,10 @@ void Circle::move( double deltaT, int screenHeight ) {
 		this->setVelocityY( -1 * velocityWhenReachedFloor );
 		move( deltaT - timeToReachFloor, screenHeight );
 	}
-	else
+	else {
 		this->setCenter( std::make_pair( newXMeters, newYMeters ));
+		this->setVelocityY( getVelocityY() + getAccelerationY() * deltaT );
+	}
 }
 
 void Circle::draw( std::function<void(int, int)> &drawer ) {
